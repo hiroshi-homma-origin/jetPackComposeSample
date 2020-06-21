@@ -1,1 +1,3 @@
 /build
+/src/main/graphql/com/kotlin/pagecurl/api/API.graphql
+/src/main/graphql/com/kotlin/pagecurl/api/schema.json

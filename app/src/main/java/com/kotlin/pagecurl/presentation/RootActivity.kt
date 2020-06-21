@@ -23,7 +23,7 @@ class RootActivity : DaggerAppCompatActivity() {
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-//        homeViewModel.fetchData()
+        homeViewModel.fetchData()
         val appContainer = (application as MyApplication).container
         setContent {
             RootScreenView(
