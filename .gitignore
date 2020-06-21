@@ -1,0 +1,14 @@
+*.iml
+.gradle
+/local.properties
+.idea/*
+.DS_Store
+/build
+/captures
+.externalNativeBuild
+
+!.idea/codeStyleSettings.xml
+!.idea/icon.png
+!.idea/icon_dark.png
+
+/vendor/bundle

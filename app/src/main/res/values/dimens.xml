@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <dimen name="navigation_view_width">320dp</dimen>
+
+    <dimen name="port_width">320dp</dimen>
+    <dimen name="port_height">650dp</dimen>
+
+    <!-- element space -->
+    <dimen name="element_spacing_x_0_0_6_2_5">0.5dp</dimen>
+    <dimen name="element_spacing_x0_2_5">2dp</dimen>
+    <dimen name="element_spacing_x0_5">4dp</dimen>
+    <dimen name="element_spacing_x1">8dp</dimen>
+    <dimen name="element_spacing_x1_2_5">10dp</dimen>
+    <dimen name="element_spacing_x1_5">12dp</dimen>
+    <dimen name="element_spacing_x2">16dp</dimen>
+    <dimen name="element_spacing_x2_5">20dp</dimen>
+    <dimen name="element_spacing_x3">24dp</dimen>
+    <dimen name="element_spacing_x4">32dp</dimen>
+    <dimen name="element_spacing_x4_5">36dp</dimen>
+    <dimen name="element_spacing_x5">40dp</dimen>
+    <dimen name="element_spacing_x6">48dp</dimen>
+    <dimen name="element_spacing_x7">56dp</dimen>
+    <dimen name="element_spacing_x8">64dp</dimen>
+
+</resources>

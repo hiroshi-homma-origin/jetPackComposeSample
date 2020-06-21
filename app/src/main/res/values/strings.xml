@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Page Curl Android</string>
+    <string name="home">ホーム</string>
+    <string name="ranking">ランキング</string>
+    <string name="bookshelf">本棚</string>
+    <string name="mypage">マイページ</string>
+    <string name="store">ストア</string>
+</resources>
