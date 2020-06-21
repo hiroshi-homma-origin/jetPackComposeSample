@@ -18,7 +18,7 @@ object ApolloController {
                 @Throws(IOException::class)
                 override fun authenticate(route: Route?, response: Response): Request? {
                     return response.request.newBuilder()
-                        .addHeader("Authorization", "Bearer 5dc1ab7dbb051dc1d381832563f45766ada43848")
+                        .addHeader("Authorization", "Bearer 73efe5abb998d7b4c57bcb0c92148cde78850589")
                         .build()
                 }
             })
