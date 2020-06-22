@@ -14,13 +14,11 @@ fun RootScreenView(
     curlViewModel: CurlViewModel,
     homeViewModel: HomeViewModel
 ) {
-    Crossfade(currentScreen) { screen ->
-        Surface(color = MaterialTheme.colors.background) {
-            BodyContentComponent(
-                currentScreen = screen,
-                curlViewModel = curlViewModel,
-                homeViewModel = homeViewModel
-            )
-        }
+    Surface(color = MaterialTheme.colors.background) {
+        BodyContentComponent(
+            currentScreen = currentScreen,
+            curlViewModel = curlViewModel,
+            homeViewModel = homeViewModel
+        )
     }
 }

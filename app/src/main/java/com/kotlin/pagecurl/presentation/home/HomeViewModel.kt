@@ -52,7 +52,6 @@ class HomeViewModel @Inject constructor(
     }
 
     suspend fun loadSuperheroes(): List<Person> {
-        delay(500)
         return getSuperheroList()
     }
 }

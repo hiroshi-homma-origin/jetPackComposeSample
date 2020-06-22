@@ -2,6 +2,7 @@ package com.kotlin.pagecurl.viewExt.extcompose
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.compose.getValue
@@ -91,7 +92,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     image.resource.resource?.let {
         Box(
             modifier =
-                Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
+            Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
                     Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             Image(it)
@@ -103,7 +104,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-        Modifier.preferredHeightIn(maxHeight = 200.dp)
+            Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -156,7 +157,7 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-        Modifier.preferredHeightIn(maxHeight = 200.dp)
+            Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -349,6 +350,7 @@ fun BodyContentComponent(
 @Composable
 fun BottomNavigationOnlySelectedLabelComponent() {
     val listItems = listOf("ホーム", "ランキング", "本棚", "ストア", "マイページ")
+    val animationDelay = 215L
     BottomNavigation(
         modifier = Modifier.padding(0.dp)
     ) {
@@ -369,7 +371,9 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 selected = CurlViewStatus.selectIndex == index,
                 onSelected = {
                     CurlViewStatus.selectIndex = index
-                    navigateTo(getScreenBasedOnIndex(index))
+                    Handler().postDelayed({
+                        navigateTo(getScreenBasedOnIndex(index))
+                    }, animationDelay)
                 },
                 alwaysShowLabels = false
             )
