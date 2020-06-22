@@ -17,7 +17,6 @@ import com.kotlin.pagecurl.domainobject.model.Person
 import com.kotlin.pagecurl.domainobject.model.getSuperheroList
 import com.kotlin.pagecurl.presentation.ApolloController
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 import javax.inject.Inject

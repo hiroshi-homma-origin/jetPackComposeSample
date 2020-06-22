@@ -92,7 +92,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     image.resource.resource?.let {
         Box(
             modifier =
-            Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
+                Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
                     Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             Image(it)
@@ -104,7 +104,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-            Modifier.preferredHeightIn(maxHeight = 200.dp)
+        Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -157,7 +157,7 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-            Modifier.preferredHeightIn(maxHeight = 200.dp)
+        Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -371,9 +371,12 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 selected = CurlViewStatus.selectIndex == index,
                 onSelected = {
                     CurlViewStatus.selectIndex = index
-                    Handler().postDelayed({
-                        navigateTo(getScreenBasedOnIndex(index))
-                    }, animationDelay)
+                    Handler().postDelayed(
+                        {
+                            navigateTo(getScreenBasedOnIndex(index))
+                        },
+                        animationDelay
+                    )
                 },
                 alwaysShowLabels = false
             )

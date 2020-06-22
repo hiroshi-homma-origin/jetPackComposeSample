@@ -1,7 +1,6 @@
 package com.kotlin.pagecurl.presentation.root
 
 import androidx.compose.Composable
-import androidx.ui.animation.Crossfade
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.currentScreen

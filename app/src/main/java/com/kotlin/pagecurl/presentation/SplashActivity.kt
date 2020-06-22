@@ -10,9 +10,12 @@ class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val intent = Intent(this, RootActivity::class.java)
-        Handler().postDelayed( {
-            startActivity(intent)
-            finish()
-        }, 100)
+        Handler().postDelayed(
+            {
+                startActivity(intent)
+                finish()
+            },
+            100
+        )
     }
 }
