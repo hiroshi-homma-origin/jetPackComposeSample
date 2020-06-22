@@ -9,7 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
-import com.kotlin.pagecurl.api.UserQuery
+import com.kotlin.pagecurl.api.PokemonsQuery
+import com.kotlin.pagecurl.api.PokemonsQuery.Data
 import com.kotlin.pagecurl.data.entity.UserDetail
 import com.kotlin.pagecurl.data.repository.ProjectRepository
 import com.kotlin.pagecurl.domainobject.model.Person
@@ -33,18 +34,18 @@ class HomeViewModel @Inject constructor(
     }
 
     fun fetchData() {
-        val viewerQuery = UserQuery.builder().build()
         viewModelScope.launch(Dispatchers.Default) {
-            ApolloController.setupApollo().query(viewerQuery)
-                .enqueue(object : ApolloCall.Callback<UserQuery.Data>() {
+            ApolloController.setupApollo().query(PokemonsQuery.builder().first(151).build())
+                .enqueue(object : ApolloCall.Callback<Data>() {
                     override fun onFailure(e: ApolloException) {
                         // Failure
                         Timber.d("check_testResponse_Failure:$e")
                     }
-
-                    override fun onResponse(response: Response<UserQuery.Data>) {
+                    override fun onResponse(response: Response<Data>) {
                         // Sucess
-                        Timber.d("check_testResponse:${response.data}")
+                        response.data?.pokemons()?.mapIndexed { index, pokemon ->
+                            Timber.d("check_testResponse:($index)${pokemon.fragments().pokemon().name()}")
+                        }
                     }
                 })
         }

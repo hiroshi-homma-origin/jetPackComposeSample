@@ -1,9 +1,0 @@
-query User {
-    user(login:"hiroshi-homma-origin") {
-        login
-        bio
-        avatarUrl
-        company
-        location
-    }
-}
