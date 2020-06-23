@@ -37,7 +37,9 @@ import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R
+import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.Person
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.currentScreen
 import com.kotlin.pagecurl.viewExt.extcompose.AppDrawer
@@ -48,6 +50,7 @@ import timber.log.Timber
 @Composable
 fun HomeViewComponent(
     homeViewModel: HomeViewModel,
+    backStack: BackStack<AppRoute>,
     scaffoldState: ScaffoldState = remember { ScaffoldState() }
 ) {
     Scaffold(
@@ -55,7 +58,8 @@ fun HomeViewComponent(
         drawerContent = {
             AppDrawer(
                 currentScreen = currentScreen,
-                closeDrawer = { scaffoldState.drawerState = Closed }
+                closeDrawer = { scaffoldState.drawerState = Closed },
+                backStack = backStack
             )
         },
         topAppBar = {
@@ -69,7 +73,7 @@ fun HomeViewComponent(
             )
         },
         bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent()
+            BottomNavigationOnlySelectedLabelComponent(backStack)
         },
         bodyContent = {
             LiveDataComponent(homeViewModel.superheroes, homeViewModel)

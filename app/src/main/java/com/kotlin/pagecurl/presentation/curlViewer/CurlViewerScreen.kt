@@ -17,7 +17,9 @@ import androidx.ui.material.ScaffoldState
 import androidx.ui.material.Surface
 import androidx.ui.unit.dp
 import androidx.ui.viewinterop.AndroidView
+import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R
+import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.viewExt.OnSwipeTouchListener
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import com.kotlin.pagecurl.viewExt.curl.interfaces.CurlViewPageProvider
@@ -26,7 +28,8 @@ import com.kotlin.pagecurl.viewExt.extcompose.BottomNavigationOnlySelectedLabelC
 
 @Composable
 fun CurlViewComponent(
-    curlViewModel: CurlViewModel
+    curlViewModel: CurlViewModel,
+    backStack: BackStack<AppRoute>
 ) {
     val scaffoldState = remember { ScaffoldState() }
     Scaffold(
@@ -35,7 +38,7 @@ fun CurlViewComponent(
             CurlViewLayoutView(curlViewModel)
         },
         bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent()
+            BottomNavigationOnlySelectedLabelComponent(backStack)
         }
     )
 }

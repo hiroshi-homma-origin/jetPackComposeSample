@@ -20,23 +20,25 @@ import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
 import androidx.ui.material.TopAppBar
 import androidx.ui.res.imageResource
-import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
+import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R.drawable
+import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.viewExt.extcompose.AppDrawer
 import com.kotlin.pagecurl.viewExt.extcompose.BottomNavigationOnlySelectedLabelComponent
 
 @Composable
-fun StoreComponent() {
+fun StoreComponent(backStack: BackStack<AppRoute>) {
     val scaffoldState = remember { ScaffoldState() }
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
             AppDrawer(
                 currentScreen = CurlViewStatus.currentScreen,
-                closeDrawer = { scaffoldState.drawerState = Closed }
+                closeDrawer = { scaffoldState.drawerState = Closed },
+                backStack = backStack
             )
         },
         topAppBar = {
@@ -50,7 +52,7 @@ fun StoreComponent() {
             )
         },
         bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent()
+            BottomNavigationOnlySelectedLabelComponent(backStack)
         },
         bodyContent = { modifier ->
             VerticalScroller {
@@ -68,10 +70,4 @@ fun StoreComponent() {
             }
         }
     )
-}
-
-@Preview
-@Composable
-fun PreviewStoreComponent() {
-    StoreComponent()
 }

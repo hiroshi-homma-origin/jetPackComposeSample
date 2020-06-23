@@ -6,11 +6,12 @@ import androidx.compose.setValue
 import com.kotlin.pagecurl.domainobject.model.AppScreen
 
 object CurlViewStatus {
+    var stack = mutableListOf(0)
     var currentScreen by mutableStateOf(AppScreen.Screen1)
     var selectIndex by mutableStateOf(AppScreen.Screen1.ordinal)
 }
 
 fun navigateTo(destination: AppScreen) {
-    CurlViewStatus.currentScreen = destination
+    CurlViewStatus.stack.add(destination.ordinal)
     CurlViewStatus.selectIndex = destination.ordinal
 }

@@ -57,6 +57,15 @@ import androidx.ui.unit.sp
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
+import com.koduok.compose.navigation.Router
+import com.koduok.compose.navigation.core.BackStack
+import com.kotlin.pagecurl.domainobject.model.AppRoute
+import com.kotlin.pagecurl.domainobject.model.AppRoute.HomeRoute
+import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab1Route
+import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab2Route
+import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
+import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
+import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
 import com.kotlin.pagecurl.domainobject.model.AppScreen
 import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen1
 import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen2
@@ -64,9 +73,7 @@ import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen3
 import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen4
 import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen5
 import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen6
-import com.kotlin.pagecurl.domainobject.model.getScreenBasedOnIndex
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.domainobject.state.navigateTo
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewModel
@@ -77,6 +84,7 @@ import com.kotlin.pagecurl.presentation.ranking.RankingComponent
 import com.kotlin.pagecurl.presentation.store.StoreComponent
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
+import timber.log.Timber
 
 @Composable
 fun LocalResourceImageComponent(@DrawableRes resId: Int) {
@@ -92,7 +100,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     image.resource.resource?.let {
         Box(
             modifier =
-                Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
+            Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
                     Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             Image(it)
@@ -104,7 +112,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-        Modifier.preferredHeightIn(maxHeight = 200.dp)
+            Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -157,7 +165,7 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-        Modifier.preferredHeightIn(maxHeight = 200.dp)
+            Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -207,15 +215,21 @@ fun NetworkImageComponentGlide(
 }
 
 @Composable
-fun AppDrawer(currentScreen: AppScreen, closeDrawer: () -> Unit) {
+fun AppDrawer(
+    currentScreen: AppScreen,
+    closeDrawer: () -> Unit,
+    backStack: BackStack<AppRoute>
+) {
     Column(modifier = Modifier.fillMaxSize()) {
         Spacer(Modifier.preferredHeight(24.dp))
         DrawerButton(
             icon = Filled.Home,
             label = "Home",
-            isSelected = currentScreen == Screen1,
+            isSelected = CurlViewStatus.selectIndex == 0,
             action = {
-                navigateTo(Screen1)
+                CurlViewStatus.selectIndex = 0
+                CurlViewStatus.stack.add(0)
+                backStack.push(HomeRoute)
                 closeDrawer()
             }
         )
@@ -223,9 +237,11 @@ fun AppDrawer(currentScreen: AppScreen, closeDrawer: () -> Unit) {
         DrawerButton(
             icon = Filled.Favorite,
             label = "Ranking",
-            isSelected = currentScreen == Screen2,
+            isSelected = CurlViewStatus.selectIndex == 1,
             action = {
-                navigateTo(Screen2)
+                CurlViewStatus.selectIndex = 1
+                CurlViewStatus.stack.add(1)
+                backStack.push(Tab1Route)
                 closeDrawer()
             }
         )
@@ -233,9 +249,11 @@ fun AppDrawer(currentScreen: AppScreen, closeDrawer: () -> Unit) {
         DrawerButton(
             icon = Filled.DateRange,
             label = "BooShelf",
-            isSelected = currentScreen == Screen3,
+            isSelected = CurlViewStatus.selectIndex == 2,
             action = {
-                navigateTo(Screen3)
+                CurlViewStatus.selectIndex = 2
+                CurlViewStatus.stack.add(2)
+                backStack.push(Tab2Route)
                 closeDrawer()
             }
         )
@@ -243,9 +261,11 @@ fun AppDrawer(currentScreen: AppScreen, closeDrawer: () -> Unit) {
         DrawerButton(
             icon = Filled.Call,
             label = "Store",
-            isSelected = currentScreen == Screen4,
+            isSelected = CurlViewStatus.selectIndex == 3,
             action = {
-                navigateTo(Screen4)
+                CurlViewStatus.selectIndex = 3
+                CurlViewStatus.stack.add(3)
+                backStack.push(Tab3Route)
                 closeDrawer()
             }
         )
@@ -253,9 +273,11 @@ fun AppDrawer(currentScreen: AppScreen, closeDrawer: () -> Unit) {
         DrawerButton(
             icon = Filled.Face,
             label = "MyPage",
-            isSelected = currentScreen == Screen5,
+            isSelected = CurlViewStatus.selectIndex == 4,
             action = {
-                navigateTo(Screen5)
+                CurlViewStatus.selectIndex = 4
+                CurlViewStatus.stack.add(4)
+                backStack.push(Tab4Route)
                 closeDrawer()
             }
         )
@@ -263,9 +285,11 @@ fun AppDrawer(currentScreen: AppScreen, closeDrawer: () -> Unit) {
         DrawerButton(
             icon = Filled.ThumbUp,
             label = "Viewer",
-            isSelected = currentScreen == Screen6,
+            isSelected = CurlViewStatus.selectIndex == 5,
             action = {
-                navigateTo(Screen6)
+                CurlViewStatus.selectIndex = 5
+                CurlViewStatus.stack.add(5)
+                backStack.push(Tab5Route)
                 closeDrawer()
             }
         )
@@ -333,24 +357,29 @@ private fun DrawerButton(
 
 @Composable
 fun BodyContentComponent(
-    currentScreen: AppScreen,
     curlViewModel: CurlViewModel,
     homeViewModel: HomeViewModel
 ) {
-    when (currentScreen) {
-        Screen1 -> HomeViewComponent(homeViewModel)
-        Screen2 -> RankingComponent()
-        Screen3 -> BookShelfComponent()
-        Screen4 -> StoreComponent()
-        Screen5 -> MyPageComponent()
-        Screen6 -> CurlViewComponent(curlViewModel)
+    Router<AppRoute>(start = HomeRoute) {
+        when (it.data) {
+            HomeRoute -> HomeViewComponent(homeViewModel, this@Router)
+            Tab1Route -> RankingComponent(this@Router)
+            Tab2Route -> BookShelfComponent(this@Router)
+            Tab3Route -> StoreComponent(this@Router)
+            Tab4Route -> MyPageComponent(this@Router)
+            Tab5Route -> CurlViewComponent(curlViewModel, this@Router)
+        }
     }
 }
 
 @Composable
-fun BottomNavigationOnlySelectedLabelComponent() {
+fun BottomNavigationOnlySelectedLabelComponent(
+    backStack: BackStack<AppRoute>
+) {
     val listItems = listOf("ホーム", "ランキング", "本棚", "ストア", "マイページ")
     val animationDelay = 215L
+    Timber.d("check_currentRoute1:${backStack.current.data}")
+    Timber.d("check_currentRoute2:${backStack.snapshot.last().data}")
     BottomNavigation(
         modifier = Modifier.padding(0.dp)
     ) {
@@ -371,11 +400,18 @@ fun BottomNavigationOnlySelectedLabelComponent() {
                 selected = CurlViewStatus.selectIndex == index,
                 onSelected = {
                     CurlViewStatus.selectIndex = index
+                    CurlViewStatus.stack.add(index)
                     Handler().postDelayed(
                         {
-                            navigateTo(getScreenBasedOnIndex(index))
-                        },
-                        animationDelay
+                            when (index) {
+                                0 -> backStack.push(HomeRoute)
+                                1 -> backStack.push(Tab1Route)
+                                2 -> backStack.push(Tab2Route)
+                                3 -> backStack.push(Tab3Route)
+                                4 -> backStack.push(Tab4Route)
+                                5 -> backStack.push(Tab5Route)
+                            }
+                        }, animationDelay
                     )
                 },
                 alwaysShowLabels = false

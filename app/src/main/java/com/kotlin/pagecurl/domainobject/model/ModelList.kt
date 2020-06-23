@@ -175,3 +175,30 @@ val users = listOf(
     User(R.drawable.avatar_15, "Rose"),
     User(R.drawable.avatar_16, "Victor")
 )
+
+sealed class AppRoute {
+    object HomeRoute : AppRoute() {
+        override fun toString(): String = AppScreen.Screen1.name
+    }
+
+    object Tab1Route : AppRoute() {
+        override fun toString(): String = AppScreen.Screen2.name
+    }
+
+    object Tab2Route : AppRoute() {
+        override fun toString(): String = AppScreen.Screen3.name
+    }
+
+    object Tab3Route : AppRoute() {
+        override fun toString(): String = AppScreen.Screen4.name
+    }
+
+    object Tab4Route : AppRoute() {
+        override fun toString(): String = AppScreen.Screen5.name
+    }
+
+    object Tab5Route : AppRoute() {
+        override fun toString(): String = AppScreen.Screen6.name
+    }
+}
+

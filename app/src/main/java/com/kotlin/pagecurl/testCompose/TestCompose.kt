@@ -20,5 +20,5 @@ private fun AppContent(
     postsRepository: PostsRepository,
     interestsRepository: InterestsRepository
 ) {
-    RankingComponent()
+//    RankingComponent(this@Router)
 }

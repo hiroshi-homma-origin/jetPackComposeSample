@@ -25,9 +25,10 @@ import androidx.ui.material.ScaffoldState
 import androidx.ui.material.TopAppBar
 import androidx.ui.res.imageResource
 import androidx.ui.res.vectorResource
-import androidx.ui.tooling.preview.Preview
 import androidx.ui.unit.dp
+import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R.drawable
+import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
@@ -39,14 +40,15 @@ import com.mobnetic.compose.sharedelement.SharedElementType.FROM
 import com.mobnetic.compose.sharedelement.SharedElementsRoot
 
 @Composable
-fun BookShelfComponent() {
+fun BookShelfComponent(backStack: BackStack<AppRoute>) {
     val scaffoldState = remember { ScaffoldState() }
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
             AppDrawer(
                 currentScreen = CurlViewStatus.currentScreen,
-                closeDrawer = { scaffoldState.drawerState = Closed }
+                closeDrawer = { scaffoldState.drawerState = Closed },
+                backStack = backStack
             )
         },
         topAppBar = {
@@ -60,7 +62,7 @@ fun BookShelfComponent() {
             )
         },
         bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent()
+            BottomNavigationOnlySelectedLabelComponent(backStack)
         },
         bodyContent = { modifier ->
             SharedElementsRoot {
@@ -124,10 +126,4 @@ fun UserDetailsScreen(user: User) {
             Text(text = user.name, style = MaterialTheme.typography.h1)
         }
     }
-}
-
-@Preview
-@Composable
-fun PreviewBookShelfComponent() {
-    BookShelfComponent()
 }
