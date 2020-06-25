@@ -1,7 +1,6 @@
 package com.kotlin.pagecurl.di.module
 
 import com.apollographql.apollo.ApolloClient
-import com.kotlin.pagecurl.data.api.ProjectService
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
@@ -74,9 +73,4 @@ class NetworkModule {
             .addConverterFactory(MoshiConverterFactory.create(moshi))
             .build()
     }
-
-    @Singleton
-    @Provides
-    fun provideProjectService(retrofit: Retrofit): ProjectService =
-        retrofit.create(ProjectService::class.java)
 }

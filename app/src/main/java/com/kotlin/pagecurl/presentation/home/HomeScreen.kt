@@ -7,7 +7,6 @@ import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.core.globalPosition
 import androidx.ui.core.onChildPositioned
-import androidx.ui.core.onPositioned
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Icon
@@ -16,7 +15,6 @@ import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
-import androidx.ui.layout.Arrangement.Center
 import androidx.ui.layout.Column
 import androidx.ui.layout.ColumnScope.weight
 import androidx.ui.layout.fillMaxSize
@@ -43,20 +41,16 @@ import androidx.ui.text.font.FontWeight
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.koduok.compose.navigation.core.BackStack
-import com.kotlin.pagecurl.MyLifecycleOwner
 import com.kotlin.pagecurl.R
 import com.kotlin.pagecurl.api.fragment.Pokemon
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.currentScreen
-import com.kotlin.pagecurl.viewExt.extcompose.AppDrawer
-import com.kotlin.pagecurl.viewExt.extcompose.BottomNavigationOnlySelectedLabelComponent
-import com.kotlin.pagecurl.viewExt.extcompose.NetworkImageComponentGlide
-import org.jetbrains.annotations.Nullable
+import com.kotlin.pagecurl.domainobject.state.setScrollOffset
+import com.kotlin.pagecurl.presentation.common.AppDrawer
+import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
+import com.kotlin.pagecurl.presentation.common.NetworkImageComponentGlide
 import timber.log.Timber
-
-private val myLifecycleOwner = MyLifecycleOwner()
 
 @Composable
 fun HomeViewComponent(
@@ -68,7 +62,6 @@ fun HomeViewComponent(
         scaffoldState = scaffoldState,
         drawerContent = {
             AppDrawer(
-                currentScreen = currentScreen,
                 closeDrawer = { scaffoldState.drawerState = Closed },
                 backStack = backStack
             )
@@ -99,7 +92,7 @@ fun LiveDataComponent(
     val pList by homeViewModel.pokemonLiveData.observeAsState(initial = emptyList())
     Timber.d("pokemonsList3:$pList")
     if (pList.isNotEmpty()) {
-        LiveDataComponentList(pList as MutableList<Pokemon>)
+        pList?.let { LiveDataComponentList(it) }
     } else {
         LiveDataLoadingComponent()
     }
@@ -107,9 +100,9 @@ fun LiveDataComponent(
 
 @Composable
 fun LiveDataComponentList(
-    superheroesList: MutableList<Pokemon>
+    superheroesList: List<Pokemon>
 ) {
-    Surface(color = Color(0xFFfffbd0.toInt()), modifier = Modifier.weight(1f)) {
+    Surface(modifier = Modifier.weight(1f)) {
         Box(
             modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 55.dp), gravity = ContentGravity.Center,
             children = {
@@ -120,29 +113,16 @@ fun LiveDataComponentList(
 }
 
 @Composable
-fun ChildrenCompose(personList: @Nullable MutableList<Pokemon>) {
+fun ChildrenCompose(personList: List<Pokemon>) {
     Timber.d("check_condition0:${CurlViewStatus.offsety}")
     VerticalScroller(
         modifier = Modifier.onChildPositioned {
             Timber.d("check_condition1:${it.globalPosition}")
-            if (it.globalPosition.x.value < 221.0f) {
-                CurlViewStatus.offsetx = it.globalPosition.x.value * -1
-            } else {
-                CurlViewStatus.offsetx = it.globalPosition.x.value * -1
-            }
-            if (CurlViewStatus.offsety < 221.0f) {
-                CurlViewStatus.offsety = it.globalPosition.y.value * -1
-            } else {
-                CurlViewStatus.offsety = it.globalPosition.y.value * -1 + 220.0f
-            }
+            setScrollOffset(it)
         },
         scrollerPosition = ScrollerPosition(CurlViewStatus.offsety)
     ) {
-        Column(
-            modifier = Modifier.onPositioned {
-                Timber.d("check_condition4:${it.globalPosition}")
-            }
-        ) {
+        Column {
             personList.mapIndexed { index, pokemon ->
                 Card(
                     color = colors[index % colors.size],

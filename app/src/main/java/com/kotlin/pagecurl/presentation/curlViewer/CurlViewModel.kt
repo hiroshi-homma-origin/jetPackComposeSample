@@ -6,17 +6,13 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.kotlin.pagecurl.data.repository.ProjectRepository
 import com.kotlin.pagecurl.domainobject.usecase.MotionEventSetting
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
-class CurlViewModel @Inject constructor(
-    private val projectRepository: ProjectRepository
-) : ViewModel(), LifecycleObserver {
+class CurlViewModel : ViewModel(), LifecycleObserver {
 
     val curlLiveData: MutableLiveData<CurlView> ? = null
 

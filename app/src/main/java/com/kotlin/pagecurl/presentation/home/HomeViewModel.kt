@@ -10,16 +10,12 @@ import com.apollographql.apollo.exception.ApolloException
 import com.kotlin.pagecurl.api.PokemonsQuery
 import com.kotlin.pagecurl.api.PokemonsQuery.Data
 import com.kotlin.pagecurl.api.fragment.Pokemon
-import com.kotlin.pagecurl.data.repository.ProjectRepository
-import com.kotlin.pagecurl.presentation.ApolloController
+import com.kotlin.pagecurl.data.ApolloController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import javax.inject.Inject
 
-class HomeViewModel @Inject constructor(
-    private val projectRepository: ProjectRepository
-) : ViewModel(), LifecycleObserver {
+class HomeViewModel : ViewModel(), LifecycleObserver {
 
     var pokemonList: MutableList<Pokemon> = mutableListOf()
     val pokemonLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()

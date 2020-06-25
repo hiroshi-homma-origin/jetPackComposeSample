@@ -25,9 +25,8 @@ import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R.drawable
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.viewExt.extcompose.AppDrawer
-import com.kotlin.pagecurl.viewExt.extcompose.BottomNavigationOnlySelectedLabelComponent
+import com.kotlin.pagecurl.presentation.common.AppDrawer
+import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 
 @Composable
 fun StoreComponent(backStack: BackStack<AppRoute>) {
@@ -36,7 +35,6 @@ fun StoreComponent(backStack: BackStack<AppRoute>) {
         scaffoldState = scaffoldState,
         drawerContent = {
             AppDrawer(
-                currentScreen = CurlViewStatus.currentScreen,
                 closeDrawer = { scaffoldState.drawerState = Closed },
                 backStack = backStack
             )

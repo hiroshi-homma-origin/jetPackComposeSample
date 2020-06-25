@@ -1,4 +1,4 @@
-package com.kotlin.pagecurl.presentation
+package com.kotlin.pagecurl.data
 
 import com.apollographql.apollo.ApolloClient
 import com.apollographql.apollo.api.cache.http.HttpCachePolicy

@@ -12,7 +12,7 @@ import com.kotlin.pagecurl.testCompose.RootScreenViewTest
 fun ComposeTestRule.launchCurlViewApp(context: Context) {
     setContent {
         CurlViewStatus.resetState()
-        RootScreenViewTest(CurlViewTestAppContainer(context))
+        RootScreenViewTest()
     }
 }
 

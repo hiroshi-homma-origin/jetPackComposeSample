@@ -1,4 +1,4 @@
-package com.kotlin.pagecurl.viewExt.extcompose
+package com.kotlin.pagecurl.presentation.common
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
@@ -66,7 +66,6 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab2Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
-import com.kotlin.pagecurl.domainobject.model.AppScreen
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
@@ -210,7 +209,6 @@ fun NetworkImageComponentGlide(
 
 @Composable
 fun AppDrawer(
-    currentScreen: AppScreen,
     closeDrawer: () -> Unit,
     backStack: BackStack<AppRoute>
 ) {

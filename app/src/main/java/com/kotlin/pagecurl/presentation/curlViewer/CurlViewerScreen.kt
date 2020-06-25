@@ -20,11 +20,11 @@ import androidx.ui.viewinterop.AndroidView
 import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R
 import com.kotlin.pagecurl.domainobject.model.AppRoute
+import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.viewExt.OnSwipeTouchListener
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import com.kotlin.pagecurl.viewExt.curl.interfaces.CurlViewPageProvider
 import com.kotlin.pagecurl.viewExt.curl.interfaces.SizeChangedObserver
-import com.kotlin.pagecurl.viewExt.extcompose.BottomNavigationOnlySelectedLabelComponent
 
 @Composable
 fun CurlViewComponent(

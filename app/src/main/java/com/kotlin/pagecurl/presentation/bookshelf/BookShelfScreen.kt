@@ -31,9 +31,8 @@ import com.kotlin.pagecurl.R.drawable
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.viewExt.extcompose.AppDrawer
-import com.kotlin.pagecurl.viewExt.extcompose.BottomNavigationOnlySelectedLabelComponent
+import com.kotlin.pagecurl.presentation.common.AppDrawer
+import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.mobnetic.compose.sharedelement.SharedElement
 import com.mobnetic.compose.sharedelement.SharedElementType
 import com.mobnetic.compose.sharedelement.SharedElementType.FROM
@@ -46,7 +45,6 @@ fun BookShelfComponent(backStack: BackStack<AppRoute>) {
         scaffoldState = scaffoldState,
         drawerContent = {
             AppDrawer(
-                currentScreen = CurlViewStatus.currentScreen,
                 closeDrawer = { scaffoldState.drawerState = Closed },
                 backStack = backStack
             )
