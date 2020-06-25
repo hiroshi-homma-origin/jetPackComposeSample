@@ -12,9 +12,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class CurlViewModel : ViewModel(), LifecycleObserver {
+class CurlViewModel : ViewModel() {
 
-    val curlLiveData: MutableLiveData<CurlView> ? = null
+    private val curlLiveData: MutableLiveData<CurlView> ? = null
 
     fun curlViewLayoutSetBackMotionEvent(curl: CurlView, orientation: Int) {
         curlLiveData?.postValue(curl)

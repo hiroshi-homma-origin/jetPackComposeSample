@@ -39,7 +39,8 @@ val users = listOf(
     User(R.drawable.avatar_13, "Mary"),
     User(R.drawable.avatar_14, "Peter"),
     User(R.drawable.avatar_15, "Rose"),
-    User(R.drawable.avatar_16, "Victor")
+    User(R.drawable.avatar_16, "Victor"),
+    User(0, "")
 )
 
 sealed class AppRoute {

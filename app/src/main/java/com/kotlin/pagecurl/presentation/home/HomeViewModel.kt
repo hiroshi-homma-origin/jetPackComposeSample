@@ -15,7 +15,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class HomeViewModel : ViewModel(), LifecycleObserver {
+class HomeViewModel : ViewModel() {
 
     var pokemonList: MutableList<Pokemon> = mutableListOf()
     val pokemonLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()
