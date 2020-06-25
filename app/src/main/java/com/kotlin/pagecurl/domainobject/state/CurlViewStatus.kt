@@ -9,9 +9,6 @@ object CurlViewStatus {
     var stack = mutableListOf(0)
     var currentScreen by mutableStateOf(AppScreen.Screen1)
     var selectIndex by mutableStateOf(AppScreen.Screen1.ordinal)
-}
-
-fun navigateTo(destination: AppScreen) {
-    CurlViewStatus.stack.add(destination.ordinal)
-    CurlViewStatus.selectIndex = destination.ordinal
+    var offsetx: Float = 0f
+    var offsety: Float = 0f
 }

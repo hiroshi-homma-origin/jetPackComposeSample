@@ -1,20 +1,16 @@
 package com.kotlin.pagecurl.presentation.home
 
 import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
 import com.kotlin.pagecurl.api.PokemonsQuery
 import com.kotlin.pagecurl.api.PokemonsQuery.Data
-import com.kotlin.pagecurl.data.entity.UserDetail
+import com.kotlin.pagecurl.api.fragment.Pokemon
 import com.kotlin.pagecurl.data.repository.ProjectRepository
-import com.kotlin.pagecurl.domainobject.model.Person
-import com.kotlin.pagecurl.domainobject.model.getSuperheroList
 import com.kotlin.pagecurl.presentation.ApolloController
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -25,12 +21,8 @@ class HomeViewModel @Inject constructor(
     private val projectRepository: ProjectRepository
 ) : ViewModel(), LifecycleObserver {
 
-    private val userList: MutableLiveData<List<UserDetail>> = MutableLiveData()
-
-    val superheroes: LiveData<List<Person>> = liveData {
-        val superheroList = loadSuperheroes()
-        emit(superheroList)
-    }
+    var pokemonList: MutableList<Pokemon> = mutableListOf()
+    val pokemonLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()
 
     fun fetchData() {
         viewModelScope.launch(Dispatchers.Default) {
@@ -40,17 +32,17 @@ class HomeViewModel @Inject constructor(
                         // Failure
                         Timber.d("check_testResponse_Failure:$e")
                     }
+
                     override fun onResponse(response: Response<Data>) {
                         // Sucess
                         response.data?.pokemons()?.mapIndexed { index, pokemon ->
-                            Timber.d("check_testResponse:($index)${pokemon.fragments().pokemon().name()}")
+                            Timber.d("pokemonsList1:($index)${pokemon.fragments().pokemon().name()}")
+                            pokemonList.add(pokemon.fragments().pokemon())
                         }
+                        Timber.d("pokemonsList2:$pokemonList")
+                        pokemonLiveData.postValue(pokemonList)
                     }
                 })
         }
-    }
-
-    suspend fun loadSuperheroes(): List<Person> {
-        return getSuperheroList()
     }
 }

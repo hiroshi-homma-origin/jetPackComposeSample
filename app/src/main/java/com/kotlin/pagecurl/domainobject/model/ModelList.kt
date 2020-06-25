@@ -201,4 +201,3 @@ sealed class AppRoute {
         override fun toString(): String = AppScreen.Screen6.name
     }
 }
-

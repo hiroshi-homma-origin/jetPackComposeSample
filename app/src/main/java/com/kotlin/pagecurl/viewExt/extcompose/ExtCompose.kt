@@ -67,12 +67,6 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
 import com.kotlin.pagecurl.domainobject.model.AppScreen
-import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen1
-import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen2
-import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen3
-import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen4
-import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen5
-import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen6
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
@@ -100,7 +94,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
     image.resource.resource?.let {
         Box(
             modifier =
-            Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
+                Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
                     Modifier.RoundedCornerClipModifier(8.dp)
         ) {
             Image(it)
@@ -112,7 +106,7 @@ fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
 fun NetworkImageComponentPicasso(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-            Modifier.preferredHeightIn(maxHeight = 200.dp)
+        Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -165,7 +159,7 @@ fun NetworkImageComponentPicasso(
 fun NetworkImageComponentGlide(
     url: String,
     modifier: Modifier = Modifier.fillMaxWidth() +
-            Modifier.preferredHeightIn(maxHeight = 200.dp)
+        Modifier.preferredHeightIn(maxHeight = 200.dp)
 ) {
     var image by state<ImageAsset?> { null }
     var drawable by state<Drawable?> { null }
@@ -411,7 +405,8 @@ fun BottomNavigationOnlySelectedLabelComponent(
                                 4 -> backStack.push(Tab4Route)
                                 5 -> backStack.push(Tab5Route)
                             }
-                        }, animationDelay
+                        },
+                        animationDelay
                     )
                 },
                 alwaysShowLabels = false

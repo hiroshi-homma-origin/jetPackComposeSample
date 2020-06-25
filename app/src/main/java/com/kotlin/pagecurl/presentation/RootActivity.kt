@@ -11,7 +11,6 @@ import com.kotlin.pagecurl.presentation.curlViewer.CurlViewModel
 import com.kotlin.pagecurl.presentation.home.HomeViewModel
 import com.kotlin.pagecurl.presentation.root.RootScreenView
 import dagger.android.support.DaggerAppCompatActivity
-import timber.log.Timber
 import javax.inject.Inject
 
 class RootActivity : DaggerAppCompatActivity() {

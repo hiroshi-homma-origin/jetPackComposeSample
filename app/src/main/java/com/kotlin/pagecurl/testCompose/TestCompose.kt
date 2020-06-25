@@ -4,7 +4,6 @@ import androidx.compose.Composable
 import com.kotlin.pagecurl.data.AppContainer
 import com.kotlin.pagecurl.data.interests.InterestsRepository
 import com.kotlin.pagecurl.data.posts.PostsRepository
-import com.kotlin.pagecurl.presentation.ranking.RankingComponent
 
 @Composable
 fun RootScreenViewTest(
