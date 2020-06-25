@@ -1,6 +1,7 @@
 package com.kotlin.pagecurl.presentation
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.ui.core.setContent
 import com.koduok.compose.navigation.core.backStackController
@@ -8,21 +9,15 @@ import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewModel
 import com.kotlin.pagecurl.presentation.home.HomeViewModel
 import com.kotlin.pagecurl.presentation.root.RootScreenView
-import dagger.android.support.DaggerAppCompatActivity
 
-class RootActivity : DaggerAppCompatActivity() {
+class RootActivity : AppCompatActivity() {
+
+    private var homeViewModel: HomeViewModel = HomeViewModel()
+    private var curlViewModel: CurlViewModel = CurlViewModel()
 
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        val homeViewModel: HomeViewModel = ViewModelProvider(
-            viewModelStore, defaultViewModelProviderFactory
-        ).get<HomeViewModel>(HomeViewModel::class.java)
-
-        val curlViewModel: CurlViewModel = ViewModelProvider(
-            viewModelStore, defaultViewModelProviderFactory
-        ).get<CurlViewModel>(CurlViewModel::class.java)
-
+        setUpViewModel()
         homeViewModel.fetchData()
         setContent {
             RootScreenView(
@@ -30,6 +25,16 @@ class RootActivity : DaggerAppCompatActivity() {
                 homeViewModel
             )
         }
+    }
+
+    private fun setUpViewModel() {
+        homeViewModel = ViewModelProvider(
+            viewModelStore, defaultViewModelProviderFactory
+        ).get<HomeViewModel>(HomeViewModel::class.java)
+
+        curlViewModel = ViewModelProvider(
+            viewModelStore, defaultViewModelProviderFactory
+        ).get<CurlViewModel>(CurlViewModel::class.java)
     }
 
     override fun onBackPressed() {
