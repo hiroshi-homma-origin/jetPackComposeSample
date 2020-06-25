@@ -3,7 +3,6 @@ package com.kotlin.pagecurl.presentation.common
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Handler
-import androidx.annotation.DrawableRes
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.onCommit
@@ -12,15 +11,12 @@ import androidx.compose.state
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
-import androidx.ui.core.clip
-import androidx.ui.core.composed
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.Canvas
 import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.ColorFilter
 import androidx.ui.graphics.ImageAsset
 import androidx.ui.graphics.asImageAsset
@@ -48,10 +44,8 @@ import androidx.ui.material.icons.filled.Face
 import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.icons.filled.Home
 import androidx.ui.material.icons.filled.ThumbUp
-import androidx.ui.res.loadImageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
-import androidx.ui.unit.Dp
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.bumptech.glide.Glide
@@ -75,84 +69,7 @@ import com.kotlin.pagecurl.presentation.home.HomeViewModel
 import com.kotlin.pagecurl.presentation.mypage.MyPageComponent
 import com.kotlin.pagecurl.presentation.ranking.RankingComponent
 import com.kotlin.pagecurl.presentation.store.StoreComponent
-import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
 import timber.log.Timber
-
-@Composable
-fun LocalResourceImageComponent(@DrawableRes resId: Int) {
-    val image = loadImageResource(resId)
-    image.resource.resource?.let {
-        Image(asset = it, modifier = Modifier.preferredHeightIn(maxHeight = 200.dp))
-    }
-}
-
-@Composable
-fun ImageWithRoundedCorners(@DrawableRes resId: Int) {
-    val image = loadImageResource(resId)
-    image.resource.resource?.let {
-        Box(
-            modifier =
-                Modifier.preferredHeight(200.dp) + Modifier.preferredWidth(200.dp) +
-                    Modifier.RoundedCornerClipModifier(8.dp)
-        ) {
-            Image(it)
-        }
-    }
-}
-
-@Composable
-fun NetworkImageComponentPicasso(
-    url: String,
-    modifier: Modifier = Modifier.fillMaxWidth() +
-        Modifier.preferredHeightIn(maxHeight = 200.dp)
-) {
-    var image by state<ImageAsset?> { null }
-    var drawable by state<Drawable?> { null }
-    onCommit(url) {
-        val picasso = Picasso.get()
-        val target = object : Target {
-            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                // TODO(lmr): we could use the drawable below
-                drawable = placeHolderDrawable
-            }
-
-            override fun onBitmapFailed(e: Exception?, errorDrawable: Drawable?) {
-                drawable = errorDrawable
-            }
-
-            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-                image = bitmap?.asImageAsset()
-            }
-        }
-        picasso
-            .load(url)
-            .into(target)
-
-        onDispose {
-            image = null
-            drawable = null
-            picasso.cancelRequest(target)
-        }
-    }
-
-    val theImage = image
-    val theDrawable = drawable
-    if (theImage != null) {
-        Box(
-            modifier = modifier,
-            gravity = ContentGravity.Center
-        ) {
-            Image(asset = theImage)
-        }
-    } else if (theDrawable != null) {
-        Canvas(modifier = modifier) {
-            drawCanvas { canvas, _ ->
-                theDrawable.draw(canvas.nativeCanvas)
-            }
-        }
-    }
-}
 
 @Composable
 fun NetworkImageComponentGlide(
@@ -297,25 +214,13 @@ private fun DrawerButton(
     modifier: Modifier = Modifier
 ) {
     val colors = MaterialTheme.colors
-    val imageAlpha = if (isSelected) {
-        1f
-    } else {
-        0.6f
-    }
-    val textIconColor = if (isSelected) {
-        colors.primary
-    } else {
-        colors.onSurface.copy(alpha = 0.6f)
-    }
-    val backgroundColor = if (isSelected) {
-        colors.primary.copy(alpha = 0.12f)
-    } else {
-        colors.surface
-    }
+    val imageAlpha = if (isSelected) { 1f } else { 0.6f }
+    val textIconColor = if (isSelected) { colors.primary } else { colors.onSurface.copy(alpha = 0.6f) }
+    val backgroundColor = if (isSelected) { colors.primary.copy(alpha = 0.12f) } else { colors.surface }
 
-    val surfaceModifier = modifier
-        .padding(start = 8.dp, top = 8.dp, end = 8.dp)
+    val surfaceModifier = modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp)
         .fillMaxWidth()
+
     Surface(
         modifier = surfaceModifier,
         color = backgroundColor,
@@ -411,9 +316,4 @@ fun BottomNavigationOnlySelectedLabelComponent(
             )
         }
     }
-}
-
-fun Modifier.RoundedCornerClipModifier(size: Dp): Modifier = composed {
-    val shape = RoundedCornerShape(size)
-    clip(shape)
 }

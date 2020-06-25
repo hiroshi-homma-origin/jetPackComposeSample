@@ -2,7 +2,6 @@ package com.kotlin.pagecurl.presentation.curlViewer
 
 import android.content.res.Configuration
 import android.view.View
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

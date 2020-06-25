@@ -1,6 +1,5 @@
 package com.kotlin.pagecurl.presentation.home
 
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
