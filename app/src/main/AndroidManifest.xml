@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest
 	xmlns:android="http://schemas.android.com/apk/res/android"
-	package="com.kotlin.pagecurl"
-	android:versionCode="1"
-	android:versionName="1.0">
-   	<application
+	package="com.kotlin.pagecurl">
+
+	<application
 		android:name=".MyApplication"
    		android:icon="@drawable/ic_launcher"
 		android:theme="@style/AppTheme"
    		android:label="@string/app_name"
 		android:allowBackup="true"
+		android:supportsRtl="true"
 		android:fullBackupContent="@xml/backup_descriptor">
 		<activity
 			android:name=".presentation.SplashActivity"
