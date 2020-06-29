@@ -153,7 +153,7 @@ fun ChildrenCompose(pList: List<Pokemon>) {
                             NetworkImageComponentGlide(
                                 url = pokemon.image().toString(),
                                 modifier = Modifier.preferredWidth(80.dp) + Modifier.preferredHeight
-                                    (80.dp)
+                                (80.dp)
                             )
                         }
                     )
