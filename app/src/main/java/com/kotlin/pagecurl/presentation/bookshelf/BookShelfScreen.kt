@@ -5,14 +5,17 @@ import androidx.compose.remember
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.Clickable
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
+import androidx.ui.foundation.clickable
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxSize
+import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.preferredSize
 import androidx.ui.material.Divider
 import androidx.ui.material.DrawerState.Closed
@@ -23,6 +26,7 @@ import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
 import androidx.ui.material.TopAppBar
+import androidx.ui.material.ripple.RippleIndication
 import androidx.ui.res.imageResource
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
@@ -68,9 +72,7 @@ fun BookShelfComponent(backStack: BackStack<AppRoute>) {
             SharedElementsRoot {
                 when (selectedUser) {
                     users[users.lastIndex] -> UsersListScreen(users)
-                    else -> {
-                        UserDetailsScreen(selectedUser)
-                    }
+                    else -> UserDetailsScreen(selectedUser)
                 }
             }
         }
@@ -108,14 +110,18 @@ fun UsersListScreen(users: List<User>) {
 @Composable
 fun UserDetailsScreen(user: User) {
     Column(modifier = Modifier.fillMaxSize(), verticalArrangement = Arrangement.Center) {
-        Clickable(
-            onClick = { selectedUser = users[users.lastIndex] },
-            modifier = Modifier.preferredSize(200.dp).gravity(Alignment.CenterHorizontally)
+        SharedElement(
+            tag = user,
+            modifier = Modifier.fillMaxWidth(),
+            type = SharedElementType.TO
         ) {
-            SharedElement(tag = user, type = SharedElementType.TO) {
+            CustomIconButton(
+                onClick = { selectedUser = users[users.lastIndex] },
+                modifier = Modifier.preferredSize(320.dp).gravity(Alignment.CenterHorizontally)
+            ) {
                 Image(
                     asset = vectorResource(id = user.avatar),
-                    modifier = Modifier.fillMaxSize(),
+                    modifier = Modifier.preferredSize(320.dp),
                     contentScale = ContentScale.Fit
                 )
             }
@@ -128,4 +134,24 @@ fun UserDetailsScreen(user: User) {
             Text(text = user.name, style = MaterialTheme.typography.h1)
         }
     }
+}
+
+@Composable
+fun CustomIconButton(
+    onClick: () -> Unit,
+    modifier: Modifier = Modifier,
+    icon: @Composable () -> Unit
+) {
+    val rippleOpacity = 0.16f
+    Box(
+        modifier = modifier
+            .clickable(
+                onClick = onClick,
+                indication = RippleIndication(
+                    color = MaterialTheme.colors.onSurface.copy(alpha = rippleOpacity)
+                )
+            ),
+        gravity = ContentGravity.Center,
+        children = icon
+    )
 }

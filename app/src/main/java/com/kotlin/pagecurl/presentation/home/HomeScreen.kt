@@ -58,6 +58,8 @@ fun HomeViewComponent(
     backStack: BackStack<AppRoute>,
     scaffoldState: ScaffoldState = remember { ScaffoldState() }
 ) {
+    val pList by homeViewModel.pokemonLiveData.observeAsState(initial = emptyList())
+    Timber.d("check_plist1:$pList")
     Scaffold(
         scaffoldState = scaffoldState,
         drawerContent = {
@@ -80,19 +82,15 @@ fun HomeViewComponent(
             BottomNavigationOnlySelectedLabelComponent(backStack)
         },
         bodyContent = {
-            LiveDataComponent(homeViewModel)
+            LiveDataComponent(homeViewModel.pokemonList)
         }
     )
 }
 
 @Composable
-fun LiveDataComponent(
-    homeViewModel: HomeViewModel
-) {
-    val pList by homeViewModel.pokemonLiveData.observeAsState(initial = emptyList())
-    Timber.d("pokemonsList3:$pList")
-    if (pList.isNotEmpty()) {
-        pList?.let { LiveDataComponentList(it) }
+fun LiveDataComponent(pokeList: List<Pokemon>) {
+    if (pokeList.isNotEmpty()) {
+        LiveDataComponentList(pokeList)
     } else {
         LiveDataLoadingComponent()
     }
@@ -100,20 +98,20 @@ fun LiveDataComponent(
 
 @Composable
 fun LiveDataComponentList(
-    superheroesList: List<Pokemon>
+    pList: List<Pokemon>
 ) {
     Surface(modifier = Modifier.weight(1f)) {
         Box(
             modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 55.dp), gravity = ContentGravity.Center,
             children = {
-                ChildrenCompose(superheroesList)
+                ChildrenCompose(pList)
             }
         )
     }
 }
 
 @Composable
-fun ChildrenCompose(personList: List<Pokemon>) {
+fun ChildrenCompose(pList: List<Pokemon>) {
     Timber.d("check_condition0:${CurlViewStatus.offsety}")
     VerticalScroller(
         modifier = Modifier.onChildPositioned {
@@ -123,7 +121,7 @@ fun ChildrenCompose(personList: List<Pokemon>) {
         scrollerPosition = ScrollerPosition(CurlViewStatus.offsety)
     ) {
         Column {
-            personList.mapIndexed { index, pokemon ->
+            pList.mapIndexed { index, pokemon ->
                 Card(
                     color = colors[index % colors.size],
                     shape = RoundedCornerShape(8.dp),
@@ -155,7 +153,7 @@ fun ChildrenCompose(personList: List<Pokemon>) {
                             NetworkImageComponentGlide(
                                 url = pokemon.image().toString(),
                                 modifier = Modifier.preferredWidth(80.dp) + Modifier.preferredHeight
-                                (80.dp)
+                                    (80.dp)
                             )
                         }
                     )

@@ -20,11 +20,12 @@ object CurlViewStatus {
 }
 
 fun setScrollOffset(it: LayoutCoordinates) {
+    val differenceOffset = 221.0f
     CurlViewStatus.offsetx = it.globalPosition.x.value * -1
-    if (CurlViewStatus.offsety < 221.0f) {
+    if (CurlViewStatus.offsety < differenceOffset) {
         CurlViewStatus.offsety = it.globalPosition.y.value * -1
     } else {
-        CurlViewStatus.offsety = it.globalPosition.y.value * -1 + 220.0f
+        CurlViewStatus.offsety = it.globalPosition.y.value * -1 + differenceOffset
     }
 }
 

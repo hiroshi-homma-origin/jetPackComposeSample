@@ -1,9 +1,10 @@
 package com.kotlin.pagecurl.presentation.curlViewer
 
+import android.app.Application
 import android.content.res.Configuration
 import android.view.View
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kotlin.pagecurl.domainobject.usecase.MotionEventSetting
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
@@ -11,9 +12,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class CurlViewModel : ViewModel() {
+class CurlViewModel(
+    application: Application
+) : AndroidViewModel(application) {
 
-    private val curlLiveData: MutableLiveData<CurlView> ? = null
+    private val curlLiveData: MutableLiveData<CurlView>? = null
 
     fun curlViewLayoutSetBackMotionEvent(curl: CurlView, orientation: Int) {
         curlLiveData?.postValue(curl)

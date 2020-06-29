@@ -2,7 +2,6 @@ package com.kotlin.pagecurl.presentation.common
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import android.os.Handler
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.onCommit
@@ -60,6 +59,7 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab2Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
+import com.kotlin.pagecurl.domainobject.model.listItems
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
@@ -69,7 +69,10 @@ import com.kotlin.pagecurl.presentation.home.HomeViewModel
 import com.kotlin.pagecurl.presentation.mypage.MyPageComponent
 import com.kotlin.pagecurl.presentation.ranking.RankingComponent
 import com.kotlin.pagecurl.presentation.store.StoreComponent
-import timber.log.Timber
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @Composable
 fun NetworkImageComponentGlide(
@@ -95,8 +98,9 @@ fun NetworkImageComponentGlide(
                 image = bitmap.asImageAsset()
             }
         }
-        glide.asBitmap()
+        val b = glide.asBitmap()
             .load(url)
+            .onlyRetrieveFromCache(true)
             .into(target)
 
         onDispose {
@@ -214,9 +218,21 @@ private fun DrawerButton(
     modifier: Modifier = Modifier
 ) {
     val colors = MaterialTheme.colors
-    val imageAlpha = if (isSelected) { 1f } else { 0.6f }
-    val textIconColor = if (isSelected) { colors.primary } else { colors.onSurface.copy(alpha = 0.6f) }
-    val backgroundColor = if (isSelected) { colors.primary.copy(alpha = 0.12f) } else { colors.surface }
+    val imageAlpha = if (isSelected) {
+        1f
+    } else {
+        0.6f
+    }
+    val textIconColor = if (isSelected) {
+        colors.primary
+    } else {
+        colors.onSurface.copy(alpha = 0.6f)
+    }
+    val backgroundColor = if (isSelected) {
+        colors.primary.copy(alpha = 0.12f)
+    } else {
+        colors.surface
+    }
 
     val surfaceModifier = modifier.padding(start = 8.dp, top = 8.dp, end = 8.dp)
         .fillMaxWidth()
@@ -273,14 +289,10 @@ fun BodyContentComponent(
 fun BottomNavigationOnlySelectedLabelComponent(
     backStack: BackStack<AppRoute>
 ) {
-    val listItems = listOf("ホーム", "ランキング", "本棚", "ストア", "マイページ")
-    val animationDelay = 215L
-    Timber.d("check_currentRoute1:${backStack.current.data}")
-    Timber.d("check_currentRoute2:${backStack.snapshot.last().data}")
     BottomNavigation(
         modifier = Modifier.padding(0.dp)
     ) {
-        listItems.forEachIndexed { index, label ->
+        listItems.mapIndexed { index, label ->
             BottomNavigationItem(
                 icon = {
                     Icon(asset = Filled.Favorite)
@@ -298,19 +310,17 @@ fun BottomNavigationOnlySelectedLabelComponent(
                 onSelected = {
                     CurlViewStatus.selectIndex = index
                     CurlViewStatus.stack.add(index)
-                    Handler().postDelayed(
-                        {
-                            when (index) {
-                                0 -> backStack.push(HomeRoute)
-                                1 -> backStack.push(Tab1Route)
-                                2 -> backStack.push(Tab2Route)
-                                3 -> backStack.push(Tab3Route)
-                                4 -> backStack.push(Tab4Route)
-                                5 -> backStack.push(Tab5Route)
-                            }
-                        },
-                        animationDelay
-                    )
+                    CoroutineScope(Dispatchers.Main).launch {
+                        delay(255)
+                        when (index) {
+                            0 -> backStack.push(HomeRoute)
+                            1 -> backStack.push(Tab1Route)
+                            2 -> backStack.push(Tab2Route)
+                            3 -> backStack.push(Tab3Route)
+                            4 -> backStack.push(Tab4Route)
+                            5 -> backStack.push(Tab5Route)
+                        }
+                    }
                 },
                 alwaysShowLabels = false
             )

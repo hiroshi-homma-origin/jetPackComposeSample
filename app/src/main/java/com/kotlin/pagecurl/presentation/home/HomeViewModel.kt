@@ -1,7 +1,8 @@
 package com.kotlin.pagecurl.presentation.home
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
@@ -14,7 +15,9 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-class HomeViewModel : ViewModel() {
+class HomeViewModel constructor(
+    application: Application
+) : AndroidViewModel(application) {
 
     var pokemonList: MutableList<Pokemon> = mutableListOf()
     val pokemonLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()

@@ -13,6 +13,14 @@ enum class AppScreen(val displayNameString: String) {
     Screen6("ビューワー")
 }
 
+val listItems = listOf(
+    AppScreen.Screen1.displayNameString,
+    AppScreen.Screen2.displayNameString,
+    AppScreen.Screen3.displayNameString,
+    AppScreen.Screen4.displayNameString,
+    AppScreen.Screen5.displayNameString
+)
+
 val colors = listOf(
     Color(0xFFffd7d7.toInt()),
     Color(0xFFffe9d6.toInt()),
@@ -67,4 +75,10 @@ sealed class AppRoute {
     object Tab5Route : AppRoute() {
         override fun toString(): String = AppScreen.Screen6.name
     }
+}
+
+sealed class CurlViewResult {
+    object Pending : CurlViewResult()
+    object Get : CurlViewResult()
+    object Error : CurlViewResult()
 }
