@@ -3,7 +3,6 @@ package com.kotlin.pagecurl.presentation.home
 import androidx.compose.Composable
 import androidx.compose.getValue
 import androidx.compose.remember
-import androidx.ui.core.Alignment
 import androidx.ui.core.Modifier
 import androidx.ui.core.globalPosition
 import androidx.ui.core.onChildPositioned
@@ -16,15 +15,12 @@ import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.ColumnScope.weight
-import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.width
-import androidx.ui.layout.wrapContentWidth
 import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Card
-import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.DrawerState.Closed
 import androidx.ui.material.ListItem
 import androidx.ui.material.Scaffold
@@ -43,10 +39,11 @@ import com.kotlin.pagecurl.api.fragment.Pokemon
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.domainobject.state.setScrollOffset
+import com.kotlin.pagecurl.domainobject.state.setScrollHomeOffset
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.presentation.common.GlideImage
+import com.kotlin.pagecurl.presentation.common.LiveDataLoadingComponent
 import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
 import timber.log.Timber
 
@@ -103,13 +100,12 @@ fun LiveDataComponentList(
 
 @Composable
 fun ChildrenCompose(pList: List<Pokemon>) {
-    Timber.d("check_condition0:${CurlViewStatus.offsety}")
     VerticalScroller(
         modifier = Modifier.onChildPositioned {
-            Timber.d("check_condition1:${it.globalPosition}")
-            setScrollOffset(it)
+            Timber.d("check_condition0:${it.globalPosition}")
+            setScrollHomeOffset(it)
         },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsety)
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyHome)
     ) {
         Column {
             pList.mapIndexed { index, pokemon ->
@@ -158,12 +154,5 @@ fun ChildrenCompose(pList: List<Pokemon>) {
                 }
             }
         }
-    }
-}
-
-@Composable
-fun LiveDataLoadingComponent() {
-    Box(modifier = Modifier.fillMaxSize(), gravity = ContentGravity.Center) {
-        CircularProgressIndicator(modifier = Modifier.wrapContentWidth(Alignment.CenterHorizontally))
     }
 }

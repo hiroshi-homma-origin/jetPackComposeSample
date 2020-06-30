@@ -2,10 +2,12 @@ package com.kotlin.pagecurl.presentation.curlViewer
 
 import android.app.Application
 import android.content.res.Configuration
+import android.graphics.drawable.Drawable
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
+import com.kotlin.pagecurl.MyApplication
 import com.kotlin.pagecurl.domainobject.usecase.MotionEventSetting
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import kotlinx.coroutines.Dispatchers
@@ -68,5 +70,13 @@ class CurlViewModel(
             MotionEventSetting.motionEventPortBackImp(curl)
             it.isEnabled = true
         }
+    }
+
+    private fun Int.getContextString(): String {
+        return getApplication<MyApplication>().applicationContext.getString(this)
+    }
+
+    private fun Int.getContextDrawable(): Drawable? {
+        return getApplication<MyApplication>().applicationContext.getDrawable(this)
     }
 }

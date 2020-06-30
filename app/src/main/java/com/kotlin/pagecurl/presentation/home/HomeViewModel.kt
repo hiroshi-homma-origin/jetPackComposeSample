@@ -1,12 +1,15 @@
 package com.kotlin.pagecurl.presentation.home
 
 import android.app.Application
+import android.graphics.drawable.Drawable
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.apollographql.apollo.ApolloCall
 import com.apollographql.apollo.api.Response
 import com.apollographql.apollo.exception.ApolloException
+import com.kotlin.pagecurl.MyApplication
+import com.kotlin.pagecurl.R
 import com.kotlin.pagecurl.api.PokemonsQuery
 import com.kotlin.pagecurl.api.PokemonsQuery.Data
 import com.kotlin.pagecurl.api.fragment.Pokemon
@@ -23,6 +26,8 @@ class HomeViewModel constructor(
     val pokemonLiveData: MutableLiveData<List<Pokemon>> = MutableLiveData()
 
     fun fetchData() {
+        Timber.d("check_getString:${R.string.app_name.getContextString()}")
+        Timber.d("check_getDrawable:${R.drawable.placeholder.getContextDrawable()}")
         viewModelScope.launch(Dispatchers.Default) {
             ApolloController.setupApollo().query(PokemonsQuery.builder().first(151).build())
                 .enqueue(object : ApolloCall.Callback<Data>() {
@@ -42,5 +47,13 @@ class HomeViewModel constructor(
                     }
                 })
         }
+    }
+
+    private fun Int.getContextString(): String {
+        return getApplication<MyApplication>().applicationContext.getString(this)
+    }
+
+    private fun Int.getContextDrawable(): Drawable? {
+        return getApplication<MyApplication>().applicationContext.getDrawable(this)
     }
 }

@@ -3,6 +3,9 @@ package com.kotlin.pagecurl.presentation.mypage
 import androidx.compose.Composable
 import androidx.compose.remember
 import androidx.ui.core.Modifier
+import androidx.ui.core.globalPosition
+import androidx.ui.core.onChildPositioned
+import androidx.ui.foundation.ScrollerPosition
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
@@ -18,9 +21,12 @@ import androidx.ui.unit.dp
 import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
+import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
+import com.kotlin.pagecurl.domainobject.state.setScrollMyPageOffset
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
+import timber.log.Timber
 
 @Composable
 fun MyPageComponent(backStack: BackStack<AppRoute>) {
@@ -40,7 +46,13 @@ fun MyPageComponent(backStack: BackStack<AppRoute>) {
             BottomNavigationOnlySelectedLabelComponent(backStack)
         },
         bodyContent = { modifier ->
-            VerticalScroller {
+            VerticalScroller(
+                modifier = Modifier.onChildPositioned {
+                    Timber.d("check_condition4:${it.globalPosition}")
+                    setScrollMyPageOffset(it)
+                },
+                scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyMyPage)
+            ) {
                 Column(modifier) {
                     repeat(100) {
                         Card(

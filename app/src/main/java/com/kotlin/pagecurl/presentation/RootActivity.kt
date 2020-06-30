@@ -17,6 +17,9 @@ class RootActivity : AppCompatActivity() {
     private var homeViewModel: HomeViewModel = HomeViewModel(myApplication)
     private var curlViewModel: CurlViewModel = CurlViewModel(myApplication)
 
+//    private val homeViewModel1 by viewModels<HomeViewModel>()
+//    private val curlViewModel1 by viewModels<CurlViewModel>()
+
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViewModel()

@@ -5,12 +5,12 @@ import androidx.compose.remember
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
+import androidx.ui.core.globalPosition
+import androidx.ui.core.onChildPositioned
 import androidx.ui.foundation.Image
+import androidx.ui.foundation.ScrollerPosition
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.clickable
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
 import androidx.ui.layout.fillMaxSize
@@ -22,22 +22,25 @@ import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
-import androidx.ui.material.ripple.RippleIndication
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
 import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
+import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectedUser
 import com.kotlin.pagecurl.domainobject.state.selectUser
+import com.kotlin.pagecurl.domainobject.state.setScrollBookShelfOffset
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
+import com.kotlin.pagecurl.viewExt.custom.CustomIconButton
 import com.mobnetic.compose.sharedelement.SharedElement
 import com.mobnetic.compose.sharedelement.SharedElementType
 import com.mobnetic.compose.sharedelement.SharedElementType.FROM
 import com.mobnetic.compose.sharedelement.SharedElementsRoot
+import timber.log.Timber
 
 @Composable
 fun BookShelfComponent(backStack: BackStack<AppRoute>) {
@@ -69,7 +72,13 @@ fun BookShelfComponent(backStack: BackStack<AppRoute>) {
 
 @Composable
 fun UsersListScreen(users: List<User>) {
-    VerticalScroller {
+    VerticalScroller(
+        modifier = Modifier.onChildPositioned {
+            Timber.d("check_condition2:${it.globalPosition}")
+            setScrollBookShelfOffset(it)
+        },
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyBookShelf)
+    ) {
         users.mapIndexed { index, user ->
             ListItem(
                 icon = {
@@ -105,14 +114,9 @@ fun UserDetailsScreen(user: User) {
         ) {
             CustomIconButton(
                 onClick = { selectedUser = users[users.lastIndex] },
-                modifier = Modifier.preferredSize(320.dp).gravity(Alignment.CenterHorizontally)
-            ) {
-                Image(
-                    asset = vectorResource(id = user.avatar),
-                    modifier = Modifier.preferredSize(320.dp),
-                    contentScale = ContentScale.Fit
-                )
-            }
+                modifier = Modifier.preferredSize(320.dp).gravity(Alignment.CenterHorizontally),
+                avatar = user.avatar
+            )
         }
         SharedElement(
             tag = user to user.name,
@@ -122,24 +126,4 @@ fun UserDetailsScreen(user: User) {
             Text(text = user.name, style = MaterialTheme.typography.h1)
         }
     }
-}
-
-@Composable
-fun CustomIconButton(
-    onClick: () -> Unit,
-    modifier: Modifier = Modifier,
-    icon: @Composable () -> Unit
-) {
-    val rippleOpacity = 0.16f
-    Box(
-        modifier = modifier
-            .clickable(
-                onClick = onClick,
-                indication = RippleIndication(
-                    color = MaterialTheme.colors.onSurface.copy(alpha = rippleOpacity)
-                )
-            ),
-        gravity = ContentGravity.Center,
-        children = icon
-    )
 }
