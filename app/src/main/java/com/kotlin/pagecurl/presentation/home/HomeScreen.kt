@@ -9,7 +9,6 @@ import androidx.ui.core.globalPosition
 import androidx.ui.core.onChildPositioned
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Icon
 import androidx.ui.foundation.ScrollerPosition
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
@@ -27,14 +26,10 @@ import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Card
 import androidx.ui.material.CircularProgressIndicator
 import androidx.ui.material.DrawerState.Closed
-import androidx.ui.material.DrawerState.Opened
-import androidx.ui.material.IconButton
 import androidx.ui.material.ListItem
 import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
 import androidx.ui.material.Surface
-import androidx.ui.material.TopAppBar
-import androidx.ui.res.imageResource
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
@@ -52,6 +47,7 @@ import com.kotlin.pagecurl.domainobject.state.setScrollOffset
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.presentation.common.GlideImage
+import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
 import timber.log.Timber
 
 @Composable
@@ -71,14 +67,7 @@ fun HomeViewComponent(
             )
         },
         topAppBar = {
-            TopAppBar(
-                title = { Text(text = "Home") },
-                navigationIcon = {
-                    IconButton(onClick = { scaffoldState.drawerState = Opened }) {
-                        Icon(imageResource(id = R.drawable.ic_launcher))
-                    }
-                }
-            )
+            TopAppBarScreen(scaffoldState, 0)
         },
         bottomAppBar = {
             BottomNavigationOnlySelectedLabelComponent(backStack)

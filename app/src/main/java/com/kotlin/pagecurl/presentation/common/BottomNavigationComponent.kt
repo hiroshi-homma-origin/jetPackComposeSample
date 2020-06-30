@@ -7,8 +7,6 @@ import androidx.ui.foundation.Text
 import androidx.ui.layout.padding
 import androidx.ui.material.BottomNavigation
 import androidx.ui.material.BottomNavigationItem
-import androidx.ui.material.icons.Icons.Filled
-import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.unit.dp
@@ -35,14 +33,14 @@ fun BottomNavigationOnlySelectedLabelComponent(
     BottomNavigation(
         modifier = Modifier.padding(0.dp)
     ) {
-        listItems.mapIndexed { index, label ->
+        listItems.mapIndexed { index, list ->
             BottomNavigationItem(
                 icon = {
-                    Icon(asset = Filled.Favorite)
+                    Icon(asset = list.second)
                 },
                 text = {
                     Text(
-                        text = label,
+                        text = list.first,
                         style = TextStyle(
                             fontFamily = FontFamily.Monospace,
                             fontSize = 10.sp

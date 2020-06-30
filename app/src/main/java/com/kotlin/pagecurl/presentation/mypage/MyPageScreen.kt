@@ -3,8 +3,6 @@ package com.kotlin.pagecurl.presentation.mypage
 import androidx.compose.Composable
 import androidx.compose.remember
 import androidx.ui.core.Modifier
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.foundation.shape.corner.RoundedCornerShape
 import androidx.ui.layout.Column
@@ -14,19 +12,15 @@ import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
 import androidx.ui.material.Card
 import androidx.ui.material.DrawerState.Closed
-import androidx.ui.material.DrawerState.Opened
-import androidx.ui.material.IconButton
 import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
-import androidx.ui.material.TopAppBar
-import androidx.ui.res.imageResource
 import androidx.ui.unit.dp
 import com.koduok.compose.navigation.core.BackStack
-import com.kotlin.pagecurl.R.drawable
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
+import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
 
 @Composable
 fun MyPageComponent(backStack: BackStack<AppRoute>) {
@@ -40,14 +34,7 @@ fun MyPageComponent(backStack: BackStack<AppRoute>) {
             )
         },
         topAppBar = {
-            TopAppBar(
-                title = { Text(text = "MyPage") },
-                navigationIcon = {
-                    IconButton(onClick = { scaffoldState.drawerState = Opened }) {
-                        Icon(imageResource(id = drawable.ic_launcher))
-                    }
-                }
-            )
+            TopAppBarScreen(scaffoldState, 4)
         },
         bottomAppBar = {
             BottomNavigationOnlySelectedLabelComponent(backStack)

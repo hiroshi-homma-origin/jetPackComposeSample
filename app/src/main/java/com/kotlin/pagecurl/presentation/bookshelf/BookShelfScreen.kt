@@ -7,7 +7,6 @@ import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Box
 import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Icon
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
@@ -19,19 +18,14 @@ import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.preferredSize
 import androidx.ui.material.Divider
 import androidx.ui.material.DrawerState.Closed
-import androidx.ui.material.DrawerState.Opened
-import androidx.ui.material.IconButton
 import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
-import androidx.ui.material.TopAppBar
 import androidx.ui.material.ripple.RippleIndication
-import androidx.ui.res.imageResource
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
 import com.koduok.compose.navigation.core.BackStack
-import com.kotlin.pagecurl.R.drawable
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
@@ -39,6 +33,7 @@ import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectedUser
 import com.kotlin.pagecurl.domainobject.state.selectUser
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
+import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
 import com.mobnetic.compose.sharedelement.SharedElement
 import com.mobnetic.compose.sharedelement.SharedElementType
 import com.mobnetic.compose.sharedelement.SharedElementType.FROM
@@ -56,14 +51,7 @@ fun BookShelfComponent(backStack: BackStack<AppRoute>) {
             )
         },
         topAppBar = {
-            TopAppBar(
-                title = { Text(text = "BookShelf") },
-                navigationIcon = {
-                    IconButton(onClick = { scaffoldState.drawerState = Opened }) {
-                        Icon(imageResource(id = drawable.ic_launcher))
-                    }
-                }
-            )
+            TopAppBarScreen(scaffoldState, 2)
         },
         bottomAppBar = {
             BottomNavigationOnlySelectedLabelComponent(backStack)

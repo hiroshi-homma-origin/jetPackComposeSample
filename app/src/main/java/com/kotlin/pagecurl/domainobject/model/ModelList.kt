@@ -2,6 +2,12 @@ package com.kotlin.pagecurl.domainobject.model
 
 import androidx.annotation.DrawableRes
 import androidx.ui.graphics.Color
+import androidx.ui.material.icons.Icons.Filled
+import androidx.ui.material.icons.filled.Call
+import androidx.ui.material.icons.filled.DateRange
+import androidx.ui.material.icons.filled.Face
+import androidx.ui.material.icons.filled.Favorite
+import androidx.ui.material.icons.filled.Home
 import com.kotlin.pagecurl.R
 
 enum class AppScreen(val displayNameString: String) {
@@ -14,11 +20,11 @@ enum class AppScreen(val displayNameString: String) {
 }
 
 val listItems = listOf(
-    AppScreen.Screen1.displayNameString,
-    AppScreen.Screen2.displayNameString,
-    AppScreen.Screen3.displayNameString,
-    AppScreen.Screen4.displayNameString,
-    AppScreen.Screen5.displayNameString
+    Pair(AppScreen.Screen1.displayNameString, Filled.Home),
+    Pair(AppScreen.Screen2.displayNameString, Filled.Favorite),
+    Pair(AppScreen.Screen3.displayNameString, Filled.DateRange),
+    Pair(AppScreen.Screen4.displayNameString, Filled.Call),
+    Pair(AppScreen.Screen5.displayNameString, Filled.Face)
 )
 
 val colors = listOf(
