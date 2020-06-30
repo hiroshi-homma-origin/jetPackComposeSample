@@ -7,7 +7,7 @@ import android.graphics.Canvas
 import android.graphics.Paint
 import android.graphics.Rect
 import androidx.core.content.res.ResourcesCompat
-import com.kotlin.pagecurl.R
+import com.kotlin.pagecurl.domainobject.model.mBitmapIds
 import com.kotlin.pagecurl.viewExt.curl.base.CurlPage
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 
@@ -15,22 +15,6 @@ class CurlViewPageProvider(
     private val resources: Resources,
     private val orientation: Int?
 ) : CurlView.PageProvider {
-    private val mBitmapIds = intArrayOf(
-        R.drawable.kimetsu1, R.drawable.kimetsu2, R.drawable.kimetsu3, R.drawable.kimetsu4,
-        R.drawable.kimetsu5, R.drawable.kimetsu6, R.drawable.kimetsu7, R.drawable.kimetsu8,
-        R.drawable.kimetsu7, R.drawable.kimetsu6, R.drawable.kimetsu5, R.drawable.kimetsu4,
-        R.drawable.kimetsu3, R.drawable.kimetsu2, R.drawable.kimetsu1, R.drawable.kimetsu2,
-        R.drawable.kimetsu3, R.drawable.kimetsu4, R.drawable.kimetsu5, R.drawable.kimetsu6,
-        R.drawable.kimetsu7, R.drawable.kimetsu8, R.drawable.kimetsu1, R.drawable.kimetsu2,
-        R.drawable.kimetsu3, R.drawable.kimetsu4, R.drawable.kimetsu5, R.drawable.kimetsu6,
-        R.drawable.kimetsu7, R.drawable.kimetsu8, R.drawable.kimetsu1, R.drawable.kimetsu2,
-        R.drawable.kimetsu3, R.drawable.kimetsu4, R.drawable.kimetsu5, R.drawable.kimetsu6,
-        R.drawable.kimetsu7, R.drawable.kimetsu8, R.drawable.kimetsu1, R.drawable.kimetsu2,
-        R.drawable.kimetsu3, R.drawable.kimetsu4, R.drawable.kimetsu5, R.drawable.kimetsu6,
-        R.drawable.kimetsu5, R.drawable.kimetsu4, R.drawable.kimetsu3, R.drawable.kimetsu2,
-        R.drawable.kimetsu1
-    )
-
     override val pageCount: Int
         get() = when (orientation) {
             Configuration.ORIENTATION_LANDSCAPE -> mBitmapIds.size - mBitmapIds.size / 2

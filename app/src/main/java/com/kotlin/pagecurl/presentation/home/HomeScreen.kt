@@ -21,7 +21,7 @@ import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.preferredWidth
+import androidx.ui.layout.width
 import androidx.ui.layout.wrapContentWidth
 import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Card
@@ -40,6 +40,8 @@ import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.unit.dp
 import androidx.ui.unit.sp
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade
 import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R
 import com.kotlin.pagecurl.api.fragment.Pokemon
@@ -49,7 +51,7 @@ import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.domainobject.state.setScrollOffset
 import com.kotlin.pagecurl.presentation.common.AppDrawer
 import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
-import com.kotlin.pagecurl.presentation.common.NetworkImageComponentGlide
+import com.kotlin.pagecurl.presentation.common.GlideImage
 import timber.log.Timber
 
 @Composable
@@ -150,11 +152,18 @@ fun ChildrenCompose(pList: List<Pokemon>) {
                         },
                         icon = {
                             Timber.d("checkString:$pokemon.image()")
-                            NetworkImageComponentGlide(
-                                url = pokemon.image().toString(),
-                                modifier = Modifier.preferredWidth(80.dp) + Modifier.preferredHeight
-                                (80.dp)
-                            )
+                            Surface(
+                                color = Color(0xFFffffff.toInt()),
+                                modifier = Modifier.width(80.dp)
+                            ) {
+                                GlideImage(pokemon.image().toString()) {
+                                    placeholder(R.drawable.placeholder)
+                                    diskCacheStrategy(DiskCacheStrategy.ALL)
+                                    onlyRetrieveFromCache(true)
+                                    fitCenter()
+                                    transition(withCrossFade(10000))
+                                }
+                            }
                         }
                     )
                 }

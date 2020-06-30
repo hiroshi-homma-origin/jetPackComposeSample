@@ -61,7 +61,6 @@ fun CurlViewLayoutView(curlViewModel: CurlViewModel) {
                         val rz = view.findViewById<View>(R.id.right_zone)
 
                         c.also { curl ->
-//                            curlViewModel.curlViewLayoutParamSet(curl, resources, orientation)
                             curl.setPageProvider(CurlViewPageProvider(resources, orientation))
                             curl.setSizeChangedObserver(SizeChangedObserver(curl))
                             curl.currentIndex = 0
