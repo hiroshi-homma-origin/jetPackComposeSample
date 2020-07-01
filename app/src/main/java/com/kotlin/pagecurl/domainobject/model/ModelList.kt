@@ -3,6 +3,7 @@ package com.kotlin.pagecurl.domainobject.model
 import androidx.annotation.DrawableRes
 import androidx.ui.graphics.Color
 import androidx.ui.material.icons.Icons.Filled
+import androidx.ui.material.icons.filled.Android
 import androidx.ui.material.icons.filled.Call
 import androidx.ui.material.icons.filled.DateRange
 import androidx.ui.material.icons.filled.Face
@@ -25,6 +26,14 @@ val listItems = listOf(
     Pair(AppScreen.Screen3.displayNameString, Filled.DateRange),
     Pair(AppScreen.Screen4.displayNameString, Filled.Call),
     Pair(AppScreen.Screen5.displayNameString, Filled.Face)
+)
+val listDrawerItems = listOf(
+    Pair(AppScreen.Screen1.displayNameString, Filled.Home),
+    Pair(AppScreen.Screen2.displayNameString, Filled.Favorite),
+    Pair(AppScreen.Screen3.displayNameString, Filled.DateRange),
+    Pair(AppScreen.Screen4.displayNameString, Filled.Call),
+    Pair(AppScreen.Screen5.displayNameString, Filled.Face),
+    Pair(AppScreen.Screen6.displayNameString, Filled.Android)
 )
 
 val colors = listOf(

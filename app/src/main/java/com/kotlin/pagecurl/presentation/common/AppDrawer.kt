@@ -15,7 +15,7 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab2Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
-import com.kotlin.pagecurl.domainobject.model.listItems
+import com.kotlin.pagecurl.domainobject.model.listDrawerItems
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 
 @Composable
@@ -25,7 +25,7 @@ fun AppDrawer(
 ) {
     Column(modifier = Modifier.fillMaxSize()) {
         Spacer(Modifier.preferredHeight(24.dp))
-        listItems.mapIndexed { index, list ->
+        listDrawerItems.mapIndexed { index, list ->
             DrawerButton(
                 icon = list.second,
                 label = list.first,
