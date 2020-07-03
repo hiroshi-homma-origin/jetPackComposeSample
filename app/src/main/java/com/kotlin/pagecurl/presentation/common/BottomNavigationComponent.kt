@@ -21,10 +21,6 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
 import com.kotlin.pagecurl.domainobject.model.listItems
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @Composable
 fun BottomNavigationOnlySelectedLabelComponent(

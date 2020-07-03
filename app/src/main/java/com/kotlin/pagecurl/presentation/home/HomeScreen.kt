@@ -36,15 +36,16 @@ import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.domainobject.state.setScrollHomeOffset
 import com.kotlin.pagecurl.presentation.common.GlideImage
 import com.kotlin.pagecurl.presentation.common.LiveDataLoadingComponent
+import com.kotlin.pagecurl.viewModel.HomeViewModel
 import timber.log.Timber
 
 @Composable
 fun HomeViewComponent(
     homeViewModel: HomeViewModel
 ) {
-    val pList by homeViewModel.pokemonLiveData.observeAsState(initial = emptyList())
+    val pList by homeViewModel.getData().observeAsState(initial = emptyList())
     Timber.d("check_plist1:$pList")
-    LiveDataComponent(homeViewModel.pokemonList)
+    LiveDataComponent(pList)
 }
 
 @Composable
@@ -77,7 +78,7 @@ fun ChildrenCompose(pList: List<Pokemon>) {
             Timber.d("check_condition0:${it.globalPosition}")
             setScrollHomeOffset(it)
         },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyHome)
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYHome)
     ) {
         Column {
             pList.mapIndexed { index, pokemon ->

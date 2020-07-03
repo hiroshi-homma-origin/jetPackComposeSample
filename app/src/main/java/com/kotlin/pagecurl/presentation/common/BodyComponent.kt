@@ -18,12 +18,12 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectIndex
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
-import com.kotlin.pagecurl.presentation.curlViewer.CurlViewModel
 import com.kotlin.pagecurl.presentation.home.HomeViewComponent
-import com.kotlin.pagecurl.presentation.home.HomeViewModel
 import com.kotlin.pagecurl.presentation.mypage.MyPageComponent
 import com.kotlin.pagecurl.presentation.ranking.RankingComponent
 import com.kotlin.pagecurl.presentation.store.StoreComponent
+import com.kotlin.pagecurl.viewModel.CurlViewModel
+import com.kotlin.pagecurl.viewModel.HomeViewModel
 
 @Composable
 fun BodyContentComponent(

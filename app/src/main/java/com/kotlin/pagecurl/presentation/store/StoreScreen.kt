@@ -26,7 +26,7 @@ fun StoreComponent() {
             Timber.d("check_condition3:${it.globalPosition}")
             setScrollStoreOffset(it)
         },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyStore)
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYStore)
     ) {
         Column {
             repeat(100) {

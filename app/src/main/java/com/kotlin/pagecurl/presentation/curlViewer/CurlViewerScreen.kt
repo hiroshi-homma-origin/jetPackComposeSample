@@ -19,6 +19,7 @@ import com.kotlin.pagecurl.viewExt.OnSwipeTouchListener
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import com.kotlin.pagecurl.viewExt.curl.interfaces.CurlViewPageProvider
 import com.kotlin.pagecurl.viewExt.curl.interfaces.SizeChangedObserver
+import com.kotlin.pagecurl.viewModel.CurlViewModel
 
 @Composable
 fun CurlViewComponent(

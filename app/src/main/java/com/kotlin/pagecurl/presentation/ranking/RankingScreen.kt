@@ -26,7 +26,7 @@ fun RankingComponent() {
             Timber.d("check_condition1:${it.globalPosition}")
             setScrollRankingOffset(it)
         },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyRanking)
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYRanking)
     ) {
         Column {
             repeat(100) {

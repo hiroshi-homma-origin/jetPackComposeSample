@@ -26,7 +26,7 @@ fun MyPageComponent() {
             Timber.d("check_condition4:${it.globalPosition}")
             setScrollMyPageOffset(it)
         },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyMyPage)
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYMyPage)
     ) {
         Column {
             repeat(100) {

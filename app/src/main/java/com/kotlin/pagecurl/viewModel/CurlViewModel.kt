@@ -1,4 +1,4 @@
-package com.kotlin.pagecurl.presentation.curlViewer
+package com.kotlin.pagecurl.viewModel
 
 import android.app.Application
 import android.content.res.Configuration

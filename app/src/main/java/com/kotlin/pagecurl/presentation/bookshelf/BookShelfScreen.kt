@@ -1,7 +1,6 @@
 package com.kotlin.pagecurl.presentation.bookshelf
 
 import androidx.compose.Composable
-import androidx.compose.remember
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
@@ -19,7 +18,6 @@ import androidx.ui.layout.preferredSize
 import androidx.ui.material.Divider
 import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.ScaffoldState
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
 import com.kotlin.pagecurl.domainobject.model.User
@@ -52,7 +50,7 @@ fun UsersListScreen(users: List<User>) {
             Timber.d("check_condition2:${it.globalPosition}")
             setScrollBookShelfOffset(it)
         },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetyBookShelf)
+        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYBookShelf)
     ) {
         users.mapIndexed { index, user ->
             ListItem(

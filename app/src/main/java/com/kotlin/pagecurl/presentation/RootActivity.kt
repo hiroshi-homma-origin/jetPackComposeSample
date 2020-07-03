@@ -8,14 +8,16 @@ import com.koduok.compose.navigation.core.backStackController
 import com.kotlin.pagecurl.MyApplication
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.presentation.common.BodyContentComponent
-import com.kotlin.pagecurl.presentation.curlViewer.CurlViewModel
-import com.kotlin.pagecurl.presentation.home.HomeViewModel
+import com.kotlin.pagecurl.viewModel.CurlViewModel
+import com.kotlin.pagecurl.viewModel.HomeViewModel
 
 class RootActivity : AppCompatActivity() {
 
     private val myApplication: MyApplication = MyApplication()
-    private var homeViewModel: HomeViewModel = HomeViewModel(myApplication)
-    private var curlViewModel: CurlViewModel = CurlViewModel(myApplication)
+    private var homeViewModel: HomeViewModel =
+        HomeViewModel(myApplication)
+    private var curlViewModel: CurlViewModel =
+        CurlViewModel(myApplication)
 
 //    private val homeViewModel by viewModels<HomeViewModel>()
 //    private val curlViewModel by viewModels<CurlViewModel>()
@@ -34,8 +36,12 @@ class RootActivity : AppCompatActivity() {
 
     private fun setUpViewModel() {
         val viewModelProvider = ViewModelProvider(viewModelStore, defaultViewModelProviderFactory)
-        homeViewModel = viewModelProvider.get<HomeViewModel>(HomeViewModel::class.java)
-        curlViewModel = viewModelProvider.get<CurlViewModel>(CurlViewModel::class.java)
+        homeViewModel = viewModelProvider.get<HomeViewModel>(
+            HomeViewModel::class.java
+        )
+        curlViewModel = viewModelProvider.get<CurlViewModel>(
+            CurlViewModel::class.java
+        )
     }
 
     override fun onBackPressed() {

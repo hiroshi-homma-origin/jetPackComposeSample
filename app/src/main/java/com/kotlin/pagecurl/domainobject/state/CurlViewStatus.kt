@@ -15,65 +15,65 @@ object CurlViewStatus {
     var currentScreen by mutableStateOf(AppScreen.Screen1)
     var selectIndex by mutableStateOf(AppScreen.Screen1.ordinal)
     var selectedUser by mutableStateOf(users[users.lastIndex])
-    var offsetxHome: Float = 0f
-    var offsetyHome: Float = 0f
-    var offsetxRanking: Float = 0f
-    var offsetyRanking: Float = 0f
-    var offsetxBookShelf: Float = 0f
-    var offsetyBookShelf: Float = 0f
-    var offsetxStore: Float = 0f
-    var offsetyStore: Float = 0f
-    var offsetxMyPage: Float = 0f
-    var offsetyMyPage: Float = 0f
+    var offsetXHome: Float = 0f
+    var offsetYHome: Float = 0f
+    var offsetXRanking: Float = 0f
+    var offsetYRanking: Float = 0f
+    var offsetXBookShelf: Float = 0f
+    var offsetYBookShelf: Float = 0f
+    var offsetXStore: Float = 0f
+    var offsetYStore: Float = 0f
+    var offsetXMyPage: Float = 0f
+    var offsetYMyPage: Float = 0f
 }
 
 fun setScrollHomeOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetxHome = it.globalPosition.x.value * -1
-    if (CurlViewStatus.offsetyHome < differenceOffset) {
-        CurlViewStatus.offsetyHome = it.globalPosition.y.value * -1
+    CurlViewStatus.offsetXHome = it.globalPosition.x.value * -1
+    if (CurlViewStatus.offsetYHome < differenceOffset) {
+        CurlViewStatus.offsetYHome = it.globalPosition.y.value * -1
     } else {
-        CurlViewStatus.offsetyHome = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYHome = it.globalPosition.y.value * -1 + differenceOffset
     }
 }
 
 fun setScrollRankingOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetxRanking = it.globalPosition.x.value * -1
-    if (CurlViewStatus.offsetyRanking < differenceOffset) {
-        CurlViewStatus.offsetyRanking = it.globalPosition.y.value * -1
+    CurlViewStatus.offsetXRanking = it.globalPosition.x.value * -1
+    if (CurlViewStatus.offsetYRanking < differenceOffset) {
+        CurlViewStatus.offsetYRanking = it.globalPosition.y.value * -1
     } else {
-        CurlViewStatus.offsetyRanking = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYRanking = it.globalPosition.y.value * -1 + differenceOffset
     }
 }
 
 fun setScrollStoreOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetxStore = it.globalPosition.x.value * -1
-    if (CurlViewStatus.offsetyStore < differenceOffset) {
-        CurlViewStatus.offsetyStore = it.globalPosition.y.value * -1
+    CurlViewStatus.offsetXStore = it.globalPosition.x.value * -1
+    if (CurlViewStatus.offsetYStore < differenceOffset) {
+        CurlViewStatus.offsetYStore = it.globalPosition.y.value * -1
     } else {
-        CurlViewStatus.offsetyStore = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYStore = it.globalPosition.y.value * -1 + differenceOffset
     }
 }
 
 fun setScrollMyPageOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetxMyPage = it.globalPosition.x.value * -1
-    if (CurlViewStatus.offsetyMyPage < differenceOffset) {
-        CurlViewStatus.offsetyMyPage = it.globalPosition.y.value * -1
+    CurlViewStatus.offsetXMyPage = it.globalPosition.x.value * -1
+    if (CurlViewStatus.offsetYMyPage < differenceOffset) {
+        CurlViewStatus.offsetYMyPage = it.globalPosition.y.value * -1
     } else {
-        CurlViewStatus.offsetyMyPage = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYMyPage = it.globalPosition.y.value * -1 + differenceOffset
     }
 }
 
 fun setScrollBookShelfOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetxBookShelf = it.globalPosition.x.value * -1
-    if (CurlViewStatus.offsetyBookShelf < differenceOffset) {
-        CurlViewStatus.offsetyBookShelf = it.globalPosition.y.value * -1
+    CurlViewStatus.offsetXBookShelf = it.globalPosition.x.value * -1
+    if (CurlViewStatus.offsetYBookShelf < differenceOffset) {
+        CurlViewStatus.offsetYBookShelf = it.globalPosition.y.value * -1
     } else {
-        CurlViewStatus.offsetyBookShelf = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYBookShelf = it.globalPosition.y.value * -1 + differenceOffset
     }
 }
 
