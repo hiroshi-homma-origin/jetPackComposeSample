@@ -37,7 +37,6 @@ import timber.log.Timber
 
 @Composable
 fun BookShelfComponent() {
-    val scaffoldState = remember { ScaffoldState() }
     SharedElementsRoot {
         when (selectedUser) {
             users[users.lastIndex] -> UsersListScreen(users)
