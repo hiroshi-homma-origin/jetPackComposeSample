@@ -51,16 +51,13 @@ fun BottomNavigationOnlySelectedLabelComponent(
                 onSelected = {
                     CurlViewStatus.selectIndex = index
                     CurlViewStatus.stack.add(index)
-                    CoroutineScope(Dispatchers.Main).launch {
-                        delay(255)
-                        when (index) {
-                            0 -> backStack.push(HomeRoute)
-                            1 -> backStack.push(Tab1Route)
-                            2 -> backStack.push(Tab2Route)
-                            3 -> backStack.push(Tab3Route)
-                            4 -> backStack.push(Tab4Route)
-                            5 -> backStack.push(Tab5Route)
-                        }
+                    when (index) {
+                        0 -> backStack.push(HomeRoute)
+                        1 -> backStack.push(Tab1Route)
+                        2 -> backStack.push(Tab2Route)
+                        3 -> backStack.push(Tab3Route)
+                        4 -> backStack.push(Tab4Route)
+                        5 -> backStack.push(Tab5Route)
                     }
                 },
                 alwaysShowLabels = false
