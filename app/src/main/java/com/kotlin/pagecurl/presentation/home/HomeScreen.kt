@@ -2,7 +2,6 @@ package com.kotlin.pagecurl.presentation.home
 
 import androidx.compose.Composable
 import androidx.compose.getValue
-import androidx.compose.remember
 import androidx.ui.core.Modifier
 import androidx.ui.core.globalPosition
 import androidx.ui.core.onChildPositioned
@@ -21,10 +20,7 @@ import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.width
 import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Card
-import androidx.ui.material.DrawerState.Closed
 import androidx.ui.material.ListItem
-import androidx.ui.material.Scaffold
-import androidx.ui.material.ScaffoldState
 import androidx.ui.material.Surface
 import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
@@ -33,46 +29,22 @@ import androidx.ui.unit.dp
 import androidx.ui.unit.sp
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade
-import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R
 import com.kotlin.pagecurl.api.fragment.Pokemon
-import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.colors
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.domainobject.state.setScrollHomeOffset
-import com.kotlin.pagecurl.presentation.common.AppDrawer
-import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.presentation.common.GlideImage
 import com.kotlin.pagecurl.presentation.common.LiveDataLoadingComponent
-import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
 import timber.log.Timber
 
 @Composable
 fun HomeViewComponent(
-    homeViewModel: HomeViewModel,
-    backStack: BackStack<AppRoute>,
-    scaffoldState: ScaffoldState = remember { ScaffoldState() }
+    homeViewModel: HomeViewModel
 ) {
     val pList by homeViewModel.pokemonLiveData.observeAsState(initial = emptyList())
     Timber.d("check_plist1:$pList")
-    Scaffold(
-        scaffoldState = scaffoldState,
-        drawerContent = {
-            AppDrawer(
-                closeDrawer = { scaffoldState.drawerState = Closed },
-                backStack = backStack
-            )
-        },
-        topAppBar = {
-            TopAppBarScreen(scaffoldState, 0)
-        },
-        bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent(backStack)
-        },
-        bodyContent = {
-            LiveDataComponent(homeViewModel.pokemonList)
-        }
-    )
+    LiveDataComponent(homeViewModel.pokemonList)
 }
 
 @Composable

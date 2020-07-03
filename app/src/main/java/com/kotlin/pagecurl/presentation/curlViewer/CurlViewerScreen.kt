@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import android.view.MotionEvent
 import android.view.View
 import androidx.compose.Composable
-import androidx.compose.remember
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.Modifier
 import androidx.ui.foundation.Box
@@ -12,15 +11,10 @@ import androidx.ui.foundation.ContentGravity
 import androidx.ui.graphics.Color
 import androidx.ui.layout.ColumnScope.weight
 import androidx.ui.layout.padding
-import androidx.ui.material.Scaffold
-import androidx.ui.material.ScaffoldState
 import androidx.ui.material.Surface
 import androidx.ui.unit.dp
 import androidx.ui.viewinterop.AndroidView
-import com.koduok.compose.navigation.core.BackStack
 import com.kotlin.pagecurl.R
-import com.kotlin.pagecurl.domainobject.model.AppRoute
-import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
 import com.kotlin.pagecurl.viewExt.OnSwipeTouchListener
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import com.kotlin.pagecurl.viewExt.curl.interfaces.CurlViewPageProvider
@@ -28,19 +22,9 @@ import com.kotlin.pagecurl.viewExt.curl.interfaces.SizeChangedObserver
 
 @Composable
 fun CurlViewComponent(
-    curlViewModel: CurlViewModel,
-    backStack: BackStack<AppRoute>
+    curlViewModel: CurlViewModel
 ) {
-    val scaffoldState = remember { ScaffoldState() }
-    Scaffold(
-        scaffoldState = scaffoldState,
-        bodyContent = {
-            CurlViewLayoutView(curlViewModel)
-        },
-        bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent(backStack)
-        }
-    )
+    CurlViewLayoutView(curlViewModel)
 }
 
 @Composable

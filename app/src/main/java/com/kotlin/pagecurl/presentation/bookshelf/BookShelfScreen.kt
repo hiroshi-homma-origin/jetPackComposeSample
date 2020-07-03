@@ -17,24 +17,17 @@ import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.preferredSize
 import androidx.ui.material.Divider
-import androidx.ui.material.DrawerState.Closed
 import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Scaffold
 import androidx.ui.material.ScaffoldState
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
-import com.koduok.compose.navigation.core.BackStack
-import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectedUser
 import com.kotlin.pagecurl.domainobject.state.selectUser
 import com.kotlin.pagecurl.domainobject.state.setScrollBookShelfOffset
-import com.kotlin.pagecurl.presentation.common.AppDrawer
-import com.kotlin.pagecurl.presentation.common.BottomNavigationOnlySelectedLabelComponent
-import com.kotlin.pagecurl.presentation.common.TopAppBarScreen
 import com.kotlin.pagecurl.viewExt.custom.CustomIconButton
 import com.mobnetic.compose.sharedelement.SharedElement
 import com.mobnetic.compose.sharedelement.SharedElementType
@@ -43,31 +36,14 @@ import com.mobnetic.compose.sharedelement.SharedElementsRoot
 import timber.log.Timber
 
 @Composable
-fun BookShelfComponent(backStack: BackStack<AppRoute>) {
+fun BookShelfComponent() {
     val scaffoldState = remember { ScaffoldState() }
-    Scaffold(
-        scaffoldState = scaffoldState,
-        drawerContent = {
-            AppDrawer(
-                closeDrawer = { scaffoldState.drawerState = Closed },
-                backStack = backStack
-            )
-        },
-        topAppBar = {
-            TopAppBarScreen(scaffoldState, 2)
-        },
-        bottomAppBar = {
-            BottomNavigationOnlySelectedLabelComponent(backStack)
-        },
-        bodyContent = { modifier ->
-            SharedElementsRoot {
-                when (selectedUser) {
-                    users[users.lastIndex] -> UsersListScreen(users)
-                    else -> UserDetailsScreen(selectedUser)
-                }
-            }
+    SharedElementsRoot {
+        when (selectedUser) {
+            users[users.lastIndex] -> UsersListScreen(users)
+            else -> UserDetailsScreen(selectedUser)
         }
-    )
+    }
 }
 
 @Composable

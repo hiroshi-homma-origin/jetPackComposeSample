@@ -1,6 +1,12 @@
 package com.kotlin.pagecurl.presentation.common
 
+import androidx.animation.TweenBuilder
 import androidx.compose.Composable
+import androidx.compose.remember
+import androidx.ui.animation.Crossfade
+import androidx.ui.material.DrawerState
+import androidx.ui.material.Scaffold
+import androidx.ui.material.ScaffoldState
 import com.koduok.compose.navigation.Router
 import com.kotlin.pagecurl.domainobject.model.AppRoute
 import com.kotlin.pagecurl.domainobject.model.AppRoute.HomeRoute
@@ -9,6 +15,7 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab2Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
+import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectIndex
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewModel
@@ -23,14 +30,37 @@ fun BodyContentComponent(
     curlViewModel: CurlViewModel,
     homeViewModel: HomeViewModel
 ) {
-    Router<AppRoute>(start = HomeRoute) {
-        when (it.data) {
-            HomeRoute -> HomeViewComponent(homeViewModel, this@Router)
-            Tab1Route -> RankingComponent(this@Router)
-            Tab2Route -> BookShelfComponent(this@Router)
-            Tab3Route -> StoreComponent(this@Router)
-            Tab4Route -> MyPageComponent(this@Router)
-            Tab5Route -> CurlViewComponent(curlViewModel, this@Router)
-        }
+    val scaffoldState = remember { ScaffoldState() }
+    Router<AppRoute>(start = HomeRoute) { route ->
+        Scaffold(
+            scaffoldState = scaffoldState,
+            drawerContent = {
+                AppDrawer(
+                    closeDrawer = { scaffoldState.drawerState = DrawerState.Closed },
+                    backStack = this@Router
+                )
+            },
+            topAppBar = {
+                TopAppBarScreen(scaffoldState, selectIndex)
+            },
+            bottomAppBar = {
+                BottomNavigationOnlySelectedLabelComponent(this@Router)
+            },
+            bodyContent = {
+                Crossfade(
+                    current = route.data,
+                    animation = TweenBuilder()
+                ) {
+                    when (route.data) {
+                        HomeRoute -> HomeViewComponent(homeViewModel)
+                        Tab1Route -> RankingComponent()
+                        Tab2Route -> BookShelfComponent()
+                        Tab3Route -> StoreComponent()
+                        Tab4Route -> MyPageComponent()
+                        Tab5Route -> CurlViewComponent(curlViewModel)
+                    }
+                }
+            }
+        )
     }
 }

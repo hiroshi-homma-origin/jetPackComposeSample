@@ -14,7 +14,7 @@ import androidx.ui.material.TopAppBar
 import androidx.ui.res.imageResource
 import androidx.ui.unit.dp
 import com.kotlin.pagecurl.R.drawable
-import com.kotlin.pagecurl.domainobject.model.listItems
+import com.kotlin.pagecurl.domainobject.model.listDrawerItems
 
 @Composable
 fun TopAppBarScreen(
@@ -22,7 +22,7 @@ fun TopAppBarScreen(
     screenNumber: Int
 ) {
     TopAppBar(
-        title = { Text(text = listItems.get(screenNumber).first) },
+        title = { Text(text = listDrawerItems[screenNumber].first) },
         navigationIcon = {
             IconButton(
                 modifier = Modifier.width(60.dp),
