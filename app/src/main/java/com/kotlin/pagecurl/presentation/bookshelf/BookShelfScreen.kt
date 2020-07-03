@@ -1,25 +1,34 @@
 package com.kotlin.pagecurl.presentation.bookshelf
 
 import androidx.compose.Composable
+import androidx.compose.getValue
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
-import androidx.ui.core.globalPosition
+import androidx.ui.core.boundsInParent
+import androidx.ui.core.boundsInRoot
 import androidx.ui.core.onChildPositioned
+import androidx.ui.foundation.Box
+import androidx.ui.foundation.ContentGravity
 import androidx.ui.foundation.Image
 import androidx.ui.foundation.ScrollerPosition
 import androidx.ui.foundation.Text
 import androidx.ui.foundation.VerticalScroller
 import androidx.ui.layout.Arrangement
 import androidx.ui.layout.Column
+import androidx.ui.layout.ColumnScope.weight
 import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.padding
 import androidx.ui.layout.preferredSize
+import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Divider
 import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
+import androidx.ui.material.Surface
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
+import androidx.ui.unit.px
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
@@ -27,6 +36,7 @@ import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectedUser
 import com.kotlin.pagecurl.domainobject.state.selectUser
 import com.kotlin.pagecurl.domainobject.state.setScrollBookShelfOffset
 import com.kotlin.pagecurl.viewExt.custom.CustomIconButton
+import com.kotlin.pagecurl.viewModel.BookShelfViewModel
 import com.mobnetic.compose.sharedelement.SharedElement
 import com.mobnetic.compose.sharedelement.SharedElementType
 import com.mobnetic.compose.sharedelement.SharedElementType.FROM
@@ -34,20 +44,40 @@ import com.mobnetic.compose.sharedelement.SharedElementsRoot
 import timber.log.Timber
 
 @Composable
-fun BookShelfComponent() {
-    SharedElementsRoot {
-        when (selectedUser) {
-            users[users.lastIndex] -> UsersListScreen(users)
-            else -> UserDetailsScreen(selectedUser)
-        }
+fun BookShelfComponent(bookShelfViewModel: BookShelfViewModel) {
+
+    val uList by bookShelfViewModel.getData().observeAsState(initial = emptyList())
+    Surface(modifier = Modifier.weight(1f)) {
+        Box(
+            modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 55.dp), gravity = ContentGravity.Center,
+            children = {
+                SharedElementsRoot {
+                    when (selectedUser) {
+                        bookShelfViewModel.getLastIndexData() -> UsersListScreen(uList, bookShelfViewModel)
+                        else -> UserDetailsScreen(selectedUser)
+                    }
+                }
+            }
+        )
     }
 }
 
 @Composable
-fun UsersListScreen(users: List<User>) {
+fun UsersListScreen(
+    users: List<User>,
+    bookShelfViewModel: BookShelfViewModel
+) {
+    var checkCount = 0
     VerticalScroller(
         modifier = Modifier.onChildPositioned {
-            Timber.d("check_condition2:${it.globalPosition}")
+            if (it.boundsInParent.bottom == it.boundsInRoot.bottom - 154.px) {
+                checkCount++
+                if (checkCount == 1) {
+                    if (CurlViewStatus.userListSize < 32) CurlViewStatus.userListSize += 17
+                    Timber.d("check_condition3:${CurlViewStatus.userListSize}")
+                    bookShelfViewModel.retryGetData()
+                }
+            }
             setScrollBookShelfOffset(it)
         },
         scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYBookShelf)
@@ -59,7 +89,7 @@ fun UsersListScreen(users: List<User>) {
                         if (user.avatar > 0) {
                             Image(
                                 asset = vectorResource(id = user.avatar),
-                                modifier = Modifier.preferredSize(48.dp),
+                                modifier = Modifier.preferredSize(60.dp),
                                 contentScale = ContentScale.Fit
                             )
                         }

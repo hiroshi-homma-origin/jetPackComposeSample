@@ -11,6 +11,9 @@ import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.icons.filled.Home
 import com.kotlin.pagecurl.R
 
+var pokeListSizeFirst = 20
+var userListSizeFirst = 16
+
 enum class AppScreen(val displayNameString: String) {
     Screen1("ホーム"),
     Screen2("ランキング"),
@@ -44,42 +47,42 @@ val colors = listOf(
     Color(0xFFd0fff8.toInt())
 )
 
-data class User(@DrawableRes val avatar: Int, val name: String)
+data class User(val id: Int, @DrawableRes val avatar: Int, val name: String)
 
 val users = listOf(
-    User(R.drawable.avatar_1, "Adam"),
-    User(R.drawable.avatar_2, "Andrew"),
-    User(R.drawable.avatar_3, "Anna"),
-    User(R.drawable.avatar_4, "Boris"),
-    User(R.drawable.avatar_5, "Carl"),
-    User(R.drawable.avatar_6, "Donna"),
-    User(R.drawable.avatar_7, "Emily"),
-    User(R.drawable.avatar_8, "Fiona"),
-    User(R.drawable.avatar_9, "Grace"),
-    User(R.drawable.avatar_10, "Irene"),
-    User(R.drawable.avatar_11, "Jack"),
-    User(R.drawable.avatar_12, "Jake"),
-    User(R.drawable.avatar_13, "Mary"),
-    User(R.drawable.avatar_14, "Peter"),
-    User(R.drawable.avatar_15, "Rose"),
-    User(R.drawable.avatar_16, "Victor"),
-    User(R.drawable.avatar_17, "Adam"),
-    User(R.drawable.avatar_18, "Andrew"),
-    User(R.drawable.avatar_19, "Anna"),
-    User(R.drawable.avatar_20, "Boris"),
-    User(R.drawable.avatar_21, "Carl"),
-    User(R.drawable.avatar_22, "Donna"),
-    User(R.drawable.avatar_23, "Emily"),
-    User(R.drawable.avatar_24, "Fiona"),
-    User(R.drawable.avatar_25, "Grace"),
-    User(R.drawable.avatar_26, "Irene"),
-    User(R.drawable.avatar_27, "Jack"),
-    User(R.drawable.avatar_28, "Jake"),
-    User(R.drawable.avatar_29, "Mary"),
-    User(R.drawable.avatar_30, "Peter"),
-    User(R.drawable.avatar_31, "Rose"),
-    User(R.drawable.avatar_32, "Victor"),
-    User(0, "")
+    User(1, R.drawable.avatar_1, "Adam"),
+    User(2, R.drawable.avatar_2, "Andrew"),
+    User(3, R.drawable.avatar_3, "Anna"),
+    User(4, R.drawable.avatar_4, "Boris"),
+    User(5, R.drawable.avatar_5, "Carl"),
+    User(6, R.drawable.avatar_6, "Donna"),
+    User(7, R.drawable.avatar_7, "Emily"),
+    User(8, R.drawable.avatar_8, "Fiona"),
+    User(9, R.drawable.avatar_9, "Grace"),
+    User(10, R.drawable.avatar_10, "Irene"),
+    User(11, R.drawable.avatar_11, "Jack"),
+    User(12, R.drawable.avatar_12, "Jake"),
+    User(13, R.drawable.avatar_13, "Mary"),
+    User(14, R.drawable.avatar_14, "Peter"),
+    User(15, R.drawable.avatar_15, "Rose"),
+    User(16, R.drawable.avatar_16, "Victor"),
+    User(17, R.drawable.avatar_17, "Adam"),
+    User(18, R.drawable.avatar_18, "Andrew"),
+    User(19, R.drawable.avatar_19, "Anna"),
+    User(20, R.drawable.avatar_20, "Boris"),
+    User(21, R.drawable.avatar_21, "Carl"),
+    User(22, R.drawable.avatar_22, "Donna"),
+    User(23, R.drawable.avatar_23, "Emily"),
+    User(24, R.drawable.avatar_24, "Fiona"),
+    User(25, R.drawable.avatar_25, "Grace"),
+    User(26, R.drawable.avatar_26, "Irene"),
+    User(27, R.drawable.avatar_27, "Jack"),
+    User(28, R.drawable.avatar_28, "Jake"),
+    User(29, R.drawable.avatar_29, "Mary"),
+    User(30, R.drawable.avatar_30, "Peter"),
+    User(31, R.drawable.avatar_31, "Rose"),
+    User(32, R.drawable.avatar_32, "Victor"),
+    User(33, 0, "")
 )
 
 sealed class AppRoute {

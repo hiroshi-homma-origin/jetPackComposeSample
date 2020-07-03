@@ -28,10 +28,10 @@ object ApolloController {
             .build()
     }
 
-    fun registerPokemonLiveData() {
+    fun registerPokemonLiveData(listSize: Int) {
         val pokemonList: MutableList<Pokemon> = mutableListOf()
         setupApollo()
-            .query(PokemonsQuery.builder().first(151).build())
+            .query(PokemonsQuery.builder().first(listSize).build())
             .enqueue(object : ApolloCall.Callback<PokemonsQuery.Data>() {
                 override fun onFailure(e: ApolloException) {
                     // Failure

@@ -22,13 +22,15 @@ import com.kotlin.pagecurl.presentation.home.HomeViewComponent
 import com.kotlin.pagecurl.presentation.mypage.MyPageComponent
 import com.kotlin.pagecurl.presentation.ranking.RankingComponent
 import com.kotlin.pagecurl.presentation.store.StoreComponent
+import com.kotlin.pagecurl.viewModel.BookShelfViewModel
 import com.kotlin.pagecurl.viewModel.CurlViewModel
 import com.kotlin.pagecurl.viewModel.HomeViewModel
 
 @Composable
 fun BodyContentComponent(
     curlViewModel: CurlViewModel,
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    bookShelfViewModel: BookShelfViewModel
 ) {
     val scaffoldState = remember { ScaffoldState() }
     Router<AppRoute>(start = HomeRoute) { route ->
@@ -54,7 +56,7 @@ fun BodyContentComponent(
                     when (route.data) {
                         HomeRoute -> HomeViewComponent(homeViewModel)
                         Tab1Route -> RankingComponent()
-                        Tab2Route -> BookShelfComponent()
+                        Tab2Route -> BookShelfComponent(bookShelfViewModel)
                         Tab3Route -> StoreComponent()
                         Tab4Route -> MyPageComponent()
                         Tab5Route -> CurlViewComponent(curlViewModel)

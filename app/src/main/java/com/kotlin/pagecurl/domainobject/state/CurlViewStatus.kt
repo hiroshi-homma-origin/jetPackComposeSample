@@ -7,6 +7,8 @@ import androidx.ui.core.LayoutCoordinates
 import androidx.ui.core.globalPosition
 import com.kotlin.pagecurl.domainobject.model.AppScreen
 import com.kotlin.pagecurl.domainobject.model.User
+import com.kotlin.pagecurl.domainobject.model.pokeListSizeFirst
+import com.kotlin.pagecurl.domainobject.model.userListSizeFirst
 import com.kotlin.pagecurl.domainobject.model.users
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectedUser
 
@@ -15,6 +17,8 @@ object CurlViewStatus {
     var currentScreen by mutableStateOf(AppScreen.Screen1)
     var selectIndex by mutableStateOf(AppScreen.Screen1.ordinal)
     var selectedUser by mutableStateOf(users[users.lastIndex])
+    var pokeListSize by mutableStateOf(pokeListSizeFirst)
+    var userListSize by mutableStateOf(userListSizeFirst)
     var offsetXHome: Float = 0f
     var offsetYHome: Float = 0f
     var offsetXRanking: Float = 0f
@@ -75,6 +79,19 @@ fun setScrollBookShelfOffset(it: LayoutCoordinates) {
     } else {
         CurlViewStatus.offsetYBookShelf = it.globalPosition.y.value * -1 + differenceOffset
     }
+}
+
+fun setAllResetOffset() {
+    CurlViewStatus.offsetXHome = 0f
+    CurlViewStatus.offsetYHome = 0f
+    CurlViewStatus.offsetXRanking = 0f
+    CurlViewStatus.offsetYRanking = 0f
+    CurlViewStatus.offsetXBookShelf = 0f
+    CurlViewStatus.offsetYBookShelf = 0f
+    CurlViewStatus.offsetXStore = 0f
+    CurlViewStatus.offsetYStore = 0f
+    CurlViewStatus.offsetXMyPage = 0f
+    CurlViewStatus.offsetYMyPage = 0f
 }
 
 fun selectUser(selectUser: User) {
