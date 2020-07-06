@@ -76,10 +76,6 @@ fun CurlViewLayoutView(curlViewModel: CurlViewModel) {
                         pz?.also { portraitZone ->
                             if (orientation == Configuration.ORIENTATION_LANDSCAPE) {
                                 portraitZone.visibility = View.GONE
-                            } else {
-                                if (curlViewModel.isCommandButtonOpen) {
-                                    portraitZone.visibility = View.VISIBLE
-                                }
                             }
                             portraitZone.setOnTouchListener(
                                 object : OnSwipeTouchListener(context) {
