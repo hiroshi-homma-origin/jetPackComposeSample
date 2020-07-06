@@ -42,7 +42,6 @@ import timber.log.Timber
 fun HomeViewComponent(
     homeViewModel: HomeViewModel
 ) {
-//    val pList by homeViewModel.getData().observeAsState(initial = emptyList())
     LiveDataComponent(homeViewModel.getData().value!!, homeViewModel)
 }
 
@@ -124,10 +123,6 @@ fun ChildrenCompose(pList: List<Pokemon>, homeViewModel: HomeViewModel) {
                             ) {
                                 GlideImage(pokemon.image().toString()) {
                                     fitCenter()
-//                                    placeholder(R.drawable.placeholder)
-//                                    diskCacheStrategy(DiskCacheStrategy.ALL)
-//                                    onlyRetrieveFromCache(true)
-//                                    transition(withCrossFade(10000))
                                 }
                             }
                         }
