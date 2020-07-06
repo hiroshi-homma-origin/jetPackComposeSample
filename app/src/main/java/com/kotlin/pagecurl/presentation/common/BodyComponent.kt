@@ -15,6 +15,7 @@ import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab2Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab3Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab4Route
 import com.kotlin.pagecurl.domainobject.model.AppRoute.Tab5Route
+import com.kotlin.pagecurl.domainobject.model.AppScreen.Screen6
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectIndex
 import com.kotlin.pagecurl.presentation.bookshelf.BookShelfComponent
 import com.kotlin.pagecurl.presentation.curlViewer.CurlViewComponent
@@ -34,35 +35,59 @@ fun BodyContentComponent(
 ) {
     val scaffoldState = remember { ScaffoldState() }
     Router<AppRoute>(start = HomeRoute) { route ->
-        Scaffold(
-            scaffoldState = scaffoldState,
-            drawerContent = {
-                AppDrawer(
-                    closeDrawer = { scaffoldState.drawerState = DrawerState.Closed },
-                    backStack = this@Router
-                )
-            },
-            topAppBar = {
-                TopAppBarScreen(scaffoldState, selectIndex)
-            },
-            bottomAppBar = {
-                BottomNavigationOnlySelectedLabelComponent(this@Router)
-            },
-            bodyContent = {
-                Crossfade(
-                    current = route.data,
-                    animation = TweenBuilder()
-                ) {
-                    when (route.data) {
-                        HomeRoute -> HomeViewComponent(homeViewModel)
-                        Tab1Route -> RankingComponent()
-                        Tab2Route -> BookShelfComponent(bookShelfViewModel)
-                        Tab3Route -> StoreComponent()
-                        Tab4Route -> MyPageComponent()
-                        Tab5Route -> CurlViewComponent(curlViewModel)
+        if(selectIndex == Screen6.ordinal){
+            Scaffold(
+                scaffoldState = scaffoldState,
+                bottomAppBar = {
+                    BottomNavigationOnlySelectedLabelComponent(this@Router)
+                },
+                bodyContent = {
+                    Crossfade(
+                        current = route.data,
+                        animation = TweenBuilder()
+                    ) {
+                        when (route.data) {
+                            HomeRoute -> HomeViewComponent(homeViewModel)
+                            Tab1Route -> RankingComponent()
+                            Tab2Route -> BookShelfComponent(bookShelfViewModel)
+                            Tab3Route -> StoreComponent()
+                            Tab4Route -> MyPageComponent()
+                            Tab5Route -> CurlViewComponent(curlViewModel)
+                        }
                     }
                 }
-            }
-        )
+            )
+        }else {
+            Scaffold(
+                scaffoldState = scaffoldState,
+                drawerContent = {
+                    AppDrawer(
+                        closeDrawer = { scaffoldState.drawerState = DrawerState.Closed },
+                        backStack = this@Router
+                    )
+                },
+                topAppBar = {
+                    TopAppBarScreen(scaffoldState, selectIndex)
+                },
+                bottomAppBar = {
+                    BottomNavigationOnlySelectedLabelComponent(this@Router)
+                },
+                bodyContent = {
+                    Crossfade(
+                        current = route.data,
+                        animation = TweenBuilder()
+                    ) {
+                        when (route.data) {
+                            HomeRoute -> HomeViewComponent(homeViewModel)
+                            Tab1Route -> RankingComponent()
+                            Tab2Route -> BookShelfComponent(bookShelfViewModel)
+                            Tab3Route -> StoreComponent()
+                            Tab4Route -> MyPageComponent()
+                            Tab5Route -> CurlViewComponent(curlViewModel)
+                        }
+                    }
+                }
+            )
+        }
     }
 }

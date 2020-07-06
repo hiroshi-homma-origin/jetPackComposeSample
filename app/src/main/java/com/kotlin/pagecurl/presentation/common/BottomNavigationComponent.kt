@@ -39,7 +39,7 @@ fun BottomNavigationOnlySelectedLabelComponent(
                         text = list.first,
                         style = TextStyle(
                             fontFamily = FontFamily.Monospace,
-                            fontSize = 10.sp
+                            fontSize = 8.sp
                         )
                     )
                 },
