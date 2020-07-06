@@ -11,7 +11,8 @@ import androidx.ui.material.icons.filled.Favorite
 import androidx.ui.material.icons.filled.Home
 import com.kotlin.pagecurl.R
 
-var pokeListSizeFirst = 20
+var pokeListSizeFirst = 30
+var pokeListMaxSize = 151
 var userListSizeFirst = 16
 
 enum class AppScreen(val displayNameString: String) {

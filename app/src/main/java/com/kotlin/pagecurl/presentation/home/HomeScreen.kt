@@ -16,10 +16,10 @@ import androidx.ui.graphics.Color
 import androidx.ui.layout.Column
 import androidx.ui.layout.ColumnScope.weight
 import androidx.ui.layout.fillMaxWidth
+import androidx.ui.layout.height
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredHeight
 import androidx.ui.layout.width
-import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Card
 import androidx.ui.material.ListItem
 import androidx.ui.material.Surface
@@ -27,11 +27,7 @@ import androidx.ui.text.TextStyle
 import androidx.ui.text.font.FontFamily
 import androidx.ui.text.font.FontWeight
 import androidx.ui.unit.dp
-import androidx.ui.unit.px
 import androidx.ui.unit.sp
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions.withCrossFade
-import com.kotlin.pagecurl.R
 import com.kotlin.pagecurl.api.fragment.Pokemon
 import com.kotlin.pagecurl.domainobject.model.colors
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
@@ -46,9 +42,8 @@ import timber.log.Timber
 fun HomeViewComponent(
     homeViewModel: HomeViewModel
 ) {
-    val pList by homeViewModel.getData().observeAsState(initial = emptyList())
-    Timber.d("check_plist1:$pList")
-    LiveDataComponent(pList, homeViewModel)
+//    val pList by homeViewModel.getData().observeAsState(initial = emptyList())
+    LiveDataComponent(homeViewModel.getData().value!!, homeViewModel)
 }
 
 @Composable
@@ -80,12 +75,13 @@ fun ChildrenCompose(pList: List<Pokemon>, homeViewModel: HomeViewModel) {
     var checkCount = 0
     VerticalScroller(
         modifier = Modifier.onChildPositioned {
-            if (it.boundsInParent.bottom == it.boundsInRoot.bottom - 154.px) {
+            Timber.d("check_condition1:${it.boundsInParent.bottom}")
+            Timber.d("check_condition2:${it.boundsInRoot.bottom}")
+            if (it.boundsInParent.bottom < it.boundsInRoot.bottom) {
                 checkCount++
                 if (checkCount == 1) {
                     if (pokeListSize < 152) pokeListSize += 20
                     Timber.d("check_condition3:$pokeListSize")
-                    homeViewModel.retry()
                 }
             }
             setScrollHomeOffset(it)
@@ -96,8 +92,8 @@ fun ChildrenCompose(pList: List<Pokemon>, homeViewModel: HomeViewModel) {
             pList.mapIndexed { index, pokemon ->
                 Card(
                     color = colors[index % colors.size],
-                    shape = RoundedCornerShape(8.dp),
-                    modifier = Modifier.padding(8.dp) +
+                    shape = RoundedCornerShape(4.dp),
+                    modifier = Modifier.padding(4.dp) +
                         Modifier.fillMaxWidth() +
                         Modifier.preferredHeight(100.dp)
                 ) {
@@ -123,15 +119,15 @@ fun ChildrenCompose(pList: List<Pokemon>, homeViewModel: HomeViewModel) {
                         icon = {
                             Timber.d("checkString:$pokemon.image()")
                             Surface(
-                                color = Color(0xFFffffff.toInt()),
-                                modifier = Modifier.width(80.dp)
+                                color = Color(0xFFFFFFFF.toInt()),
+                                modifier = Modifier.width(80.dp) + Modifier.height(80.dp)
                             ) {
                                 GlideImage(pokemon.image().toString()) {
-                                    placeholder(R.drawable.placeholder)
-                                    diskCacheStrategy(DiskCacheStrategy.ALL)
-                                    onlyRetrieveFromCache(true)
                                     fitCenter()
-                                    transition(withCrossFade(10000))
+//                                    placeholder(R.drawable.placeholder)
+//                                    diskCacheStrategy(DiskCacheStrategy.ALL)
+//                                    onlyRetrieveFromCache(true)
+//                                    transition(withCrossFade(10000))
                                 }
                             }
                         }

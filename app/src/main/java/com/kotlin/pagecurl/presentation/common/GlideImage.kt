@@ -6,6 +6,7 @@ import androidx.compose.Composable
 import androidx.compose.FrameManager
 import androidx.compose.onCommit
 import androidx.compose.state
+import androidx.core.graphics.drawable.toBitmap
 import androidx.ui.core.ContextAmbient
 import androidx.ui.core.WithConstraints
 import androidx.ui.foundation.Image
@@ -17,6 +18,8 @@ import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.kotlin.pagecurl.R
+import kotlinx.android.synthetic.main.curl_view.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -28,8 +31,9 @@ fun GlideImage(
     customize: RequestBuilder<Bitmap>.() -> RequestBuilder<Bitmap> = { this }
 ) {
     WithConstraints {
-        val image = state<ImageAsset?> { null }
         val context = ContextAmbient.current
+        val pBitmap = context.resources.getDrawable(R.drawable.placeholder, null).toBitmap()
+        val image = state<ImageAsset?> { pBitmap.asImageAsset() }
 //        val cacheDrawable = state<Drawable?> { null }
 
         onCommit(model) {
