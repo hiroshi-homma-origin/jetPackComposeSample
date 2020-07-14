@@ -40,11 +40,10 @@ object ApolloController {
 
                 override fun onResponse(response: Response<PokemonsQuery.Data>) {
                     // Sucess
-                    response.data?.pokemons()?.mapIndexed { index, pokemon ->
-                        Timber.d("pokemonsList1:($index)${pokemon.fragments().pokemon().name()}")
+                    Timber.d("pokemonsList2:${response.data?.pokemons()}")
+                    response.data?.pokemons()?.map { pokemon ->
                         pokemonList.add(pokemon.fragments().pokemon())
                     }
-                    Timber.d("pokemonsList2:$pokemonList")
                     CurlViewRepository.pokemonLiveData.postValue(pokemonList)
                 }
             })

@@ -21,12 +21,11 @@ import androidx.ui.core.drawLayer
 import androidx.ui.core.onChildPositioned
 import androidx.ui.core.onPositioned
 import androidx.ui.foundation.Box
+import androidx.ui.geometry.Offset
 import androidx.ui.layout.Stack
 import androidx.ui.layout.offset
 import androidx.ui.layout.preferredSize
-import androidx.ui.unit.Px
 import androidx.ui.unit.PxBounds
-import androidx.ui.unit.PxPosition
 import androidx.ui.unit.height
 import androidx.ui.unit.width
 import com.mobnetic.compose.sharedelement.SharedElementTransition.InProgress
@@ -145,8 +144,8 @@ private fun SharedElementTransitionPlaceholder(
 @Composable
 private fun SharedElementTransitionPlaceholder(
     sharedElement: PositionedSharedElement,
-    offsetX: Px,
-    offsetY: Px,
+    offsetX: Float,
+    offsetY: Float,
     scaleX: Float = 1f,
     scaleY: Float = 1f,
     alpha: Float = 1f
@@ -363,11 +362,11 @@ private sealed class SharedElementTransition(val startElement: PositionedSharedE
         val transitionDefinition = transitionDefinition {
             state(State.START) {
                 this[startElementPropKeys.position] =
-                    PxPosition(startElement.bounds.left, startElement.bounds.top)
+                    setOffset(startElement.bounds.left, startElement.bounds.top)
                 this[startElementPropKeys.scaleX] = 1f
                 this[startElementPropKeys.scaleY] = 1f
                 this[startElementPropKeys.alpha] = 1f
-                this[endElementPropKeys.position] = PxPosition(
+                this[endElementPropKeys.position] = setOffset(
                     x = startElement.bounds.left + (startElement.bounds.width - endElement.bounds.width) / 2f,
                     y = startElement.bounds.top + (startElement.bounds.height - endElement.bounds.height) / 2f
                 )
@@ -378,7 +377,7 @@ private sealed class SharedElementTransition(val startElement: PositionedSharedE
                 this[endElementPropKeys.alpha] = 0f
             }
             state(State.END) {
-                this[startElementPropKeys.position] = PxPosition(
+                this[startElementPropKeys.position] = setOffset(
                     x = endElement.bounds.left + (endElement.bounds.width - startElement.bounds.width) / 2f,
                     y = endElement.bounds.top + (endElement.bounds.height - startElement.bounds.height) / 2f
                 )
@@ -388,7 +387,7 @@ private sealed class SharedElementTransition(val startElement: PositionedSharedE
                     endElement.bounds.height / startElement.bounds.height
                 this[startElementPropKeys.alpha] = 0f
                 this[endElementPropKeys.position] =
-                    PxPosition(endElement.bounds.left, endElement.bounds.top)
+                    setOffset(endElement.bounds.left, endElement.bounds.top)
                 this[endElementPropKeys.scaleX] = 1f
                 this[endElementPropKeys.scaleY] = 1f
                 this[endElementPropKeys.alpha] = 1f
@@ -406,6 +405,10 @@ private sealed class SharedElementTransition(val startElement: PositionedSharedE
 
         fun cleanup() {
             onTransitionFinished = {}
+        }
+
+        fun setOffset(x: Float, y: Float): Offset {
+            return Offset(x, y)
         }
 
         enum class State {

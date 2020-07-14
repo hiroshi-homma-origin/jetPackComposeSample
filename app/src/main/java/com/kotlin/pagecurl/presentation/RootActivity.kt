@@ -28,8 +28,6 @@ class RootActivity : AppCompatActivity() {
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViewModel()
-        homeViewModel.fetchData()
-        bookShelfViewModel.fetchData()
         setContent {
             BodyContentComponent(
                 curlViewModel,

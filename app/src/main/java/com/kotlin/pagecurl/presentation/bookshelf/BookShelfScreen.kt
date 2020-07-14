@@ -1,7 +1,6 @@
 package com.kotlin.pagecurl.presentation.bookshelf
 
 import androidx.compose.Composable
-import androidx.compose.getValue
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
@@ -21,14 +20,12 @@ import androidx.ui.layout.fillMaxSize
 import androidx.ui.layout.fillMaxWidth
 import androidx.ui.layout.padding
 import androidx.ui.layout.preferredSize
-import androidx.ui.livedata.observeAsState
 import androidx.ui.material.Divider
 import androidx.ui.material.ListItem
 import androidx.ui.material.MaterialTheme
 import androidx.ui.material.Surface
 import androidx.ui.res.vectorResource
 import androidx.ui.unit.dp
-import androidx.ui.unit.px
 import com.kotlin.pagecurl.domainobject.model.User
 import com.kotlin.pagecurl.domainobject.model.users
 import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
@@ -45,15 +42,13 @@ import timber.log.Timber
 
 @Composable
 fun BookShelfComponent(bookShelfViewModel: BookShelfViewModel) {
-
-    val uList by bookShelfViewModel.getData().observeAsState(initial = emptyList())
     Surface(modifier = Modifier.weight(1f)) {
         Box(
             modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 55.dp), gravity = ContentGravity.Center,
             children = {
                 SharedElementsRoot {
                     when (selectedUser) {
-                        bookShelfViewModel.getLastIndexData() -> UsersListScreen(uList, bookShelfViewModel)
+                        bookShelfViewModel.getLastIndexData() -> UsersListScreen(bookShelfViewModel.getData().value!!, bookShelfViewModel)
                         else -> UserDetailsScreen(selectedUser)
                     }
                 }
@@ -70,12 +65,11 @@ fun UsersListScreen(
     var checkCount = 0
     VerticalScroller(
         modifier = Modifier.onChildPositioned {
-            if (it.boundsInParent.bottom == it.boundsInRoot.bottom - 154.px) {
+            if (it.boundsInParent.bottom < it.boundsInRoot.bottom) {
                 checkCount++
                 if (checkCount == 1) {
                     if (CurlViewStatus.userListSize < 32) CurlViewStatus.userListSize += 17
                     Timber.d("check_condition3:${CurlViewStatus.userListSize}")
-                    bookShelfViewModel.retryGetData()
                 }
             }
             setScrollBookShelfOffset(it)
