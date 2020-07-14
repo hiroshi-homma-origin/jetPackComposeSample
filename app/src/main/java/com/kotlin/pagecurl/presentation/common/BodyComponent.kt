@@ -35,10 +35,10 @@ fun BodyContentComponent(
 ) {
     val scaffoldState = remember { ScaffoldState() }
     Router<AppRoute>(start = HomeRoute) { route ->
-        if(selectIndex == Screen6.ordinal){
+        if (selectIndex == Screen6.ordinal) {
             Scaffold(
                 scaffoldState = scaffoldState,
-                bottomAppBar = {
+                bottomBar = {
                     BottomNavigationOnlySelectedLabelComponent(this@Router)
                 },
                 bodyContent = {
@@ -57,7 +57,7 @@ fun BodyContentComponent(
                     }
                 }
             )
-        }else {
+        } else {
             Scaffold(
                 scaffoldState = scaffoldState,
                 drawerContent = {
@@ -66,10 +66,10 @@ fun BodyContentComponent(
                         backStack = this@Router
                     )
                 },
-                topAppBar = {
+                topBar = {
                     TopAppBarScreen(scaffoldState, selectIndex)
                 },
-                bottomAppBar = {
+                bottomBar = {
                     BottomNavigationOnlySelectedLabelComponent(this@Router)
                 },
                 bodyContent = {

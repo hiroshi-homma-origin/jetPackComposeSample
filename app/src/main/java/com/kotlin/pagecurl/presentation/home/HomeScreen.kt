@@ -1,7 +1,6 @@
 package com.kotlin.pagecurl.presentation.home
 
 import androidx.compose.Composable
-import androidx.compose.getValue
 import androidx.ui.core.Modifier
 import androidx.ui.core.boundsInParent
 import androidx.ui.core.boundsInRoot

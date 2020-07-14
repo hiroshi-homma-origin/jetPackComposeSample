@@ -1,7 +1,6 @@
 package com.kotlin.pagecurl.presentation.bookshelf
 
 import androidx.compose.Composable
-import androidx.compose.getValue
 import androidx.ui.core.Alignment
 import androidx.ui.core.ContentScale
 import androidx.ui.core.Modifier
@@ -43,8 +42,6 @@ import timber.log.Timber
 
 @Composable
 fun BookShelfComponent(bookShelfViewModel: BookShelfViewModel) {
-
-//    val uList by bookShelfViewModel.getData().observeAsState(initial = emptyList())
     Surface(modifier = Modifier.weight(1f)) {
         Box(
             modifier = Modifier.padding(0.dp, 0.dp, 0.dp, 55.dp), gravity = ContentGravity.Center,

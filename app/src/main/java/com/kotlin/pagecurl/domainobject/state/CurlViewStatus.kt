@@ -33,51 +33,51 @@ object CurlViewStatus {
 
 fun setScrollHomeOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetXHome = it.globalPosition.x.value * -1
+    CurlViewStatus.offsetXHome = it.globalPosition.x * -1
     if (CurlViewStatus.offsetYHome < differenceOffset) {
-        CurlViewStatus.offsetYHome = it.globalPosition.y.value * -1
+        CurlViewStatus.offsetYHome = it.globalPosition.y * -1
     } else {
-        CurlViewStatus.offsetYHome = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYHome = it.globalPosition.y * -1 + differenceOffset
     }
 }
 
 fun setScrollRankingOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetXRanking = it.globalPosition.x.value * -1
+    CurlViewStatus.offsetXRanking = it.globalPosition.x * -1
     if (CurlViewStatus.offsetYRanking < differenceOffset) {
-        CurlViewStatus.offsetYRanking = it.globalPosition.y.value * -1
+        CurlViewStatus.offsetYRanking = it.globalPosition.y * -1
     } else {
-        CurlViewStatus.offsetYRanking = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYRanking = it.globalPosition.y * -1 + differenceOffset
     }
 }
 
 fun setScrollStoreOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetXStore = it.globalPosition.x.value * -1
+    CurlViewStatus.offsetXStore = it.globalPosition.x * -1
     if (CurlViewStatus.offsetYStore < differenceOffset) {
-        CurlViewStatus.offsetYStore = it.globalPosition.y.value * -1
+        CurlViewStatus.offsetYStore = it.globalPosition.y * -1
     } else {
-        CurlViewStatus.offsetYStore = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYStore = it.globalPosition.y * -1 + differenceOffset
     }
 }
 
 fun setScrollMyPageOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetXMyPage = it.globalPosition.x.value * -1
+    CurlViewStatus.offsetXMyPage = it.globalPosition.x * -1
     if (CurlViewStatus.offsetYMyPage < differenceOffset) {
-        CurlViewStatus.offsetYMyPage = it.globalPosition.y.value * -1
+        CurlViewStatus.offsetYMyPage = it.globalPosition.y * -1
     } else {
-        CurlViewStatus.offsetYMyPage = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYMyPage = it.globalPosition.y * -1 + differenceOffset
     }
 }
 
 fun setScrollBookShelfOffset(it: LayoutCoordinates) {
     val differenceOffset = 221.0f
-    CurlViewStatus.offsetXBookShelf = it.globalPosition.x.value * -1
+    CurlViewStatus.offsetXBookShelf = it.globalPosition.x * -1
     if (CurlViewStatus.offsetYBookShelf < differenceOffset) {
-        CurlViewStatus.offsetYBookShelf = it.globalPosition.y.value * -1
+        CurlViewStatus.offsetYBookShelf = it.globalPosition.y * -1
     } else {
-        CurlViewStatus.offsetYBookShelf = it.globalPosition.y.value * -1 + differenceOffset
+        CurlViewStatus.offsetYBookShelf = it.globalPosition.y * -1 + differenceOffset
     }
 }
 

@@ -81,7 +81,7 @@ class CurlViewModel(
         curlCurrentIndex = curl.currentIndex - 2
     }
 
-    fun isCommandButtonOpen(){
+    fun isCommandButtonOpen() {
         isCommandButtonOpen = !isCommandButtonOpen
     }
 

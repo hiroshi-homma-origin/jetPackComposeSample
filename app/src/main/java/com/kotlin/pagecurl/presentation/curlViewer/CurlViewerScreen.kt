@@ -17,7 +17,6 @@ import androidx.ui.material.Surface
 import androidx.ui.unit.dp
 import androidx.ui.viewinterop.AndroidView
 import com.kotlin.pagecurl.R
-import com.kotlin.pagecurl.domainobject.model.mBitmapIds
 import com.kotlin.pagecurl.viewExt.OnSwipeTouchListener
 import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import com.kotlin.pagecurl.viewExt.curl.interfaces.CurlViewPageProvider
