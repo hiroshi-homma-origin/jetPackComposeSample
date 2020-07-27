@@ -42,6 +42,6 @@ class SplashActivity : AppCompatActivity() {
 
     private fun setUpViewModel() {
         val viewModelProvider = ViewModelProvider(viewModelStore, defaultViewModelProviderFactory)
-        splashViewModel = viewModelProvider.get<SplashViewModel>(SplashViewModel::class.java)
+        splashViewModel = viewModelProvider.get(SplashViewModel::class.java)
     }
 }

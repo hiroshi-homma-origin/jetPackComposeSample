@@ -5,10 +5,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.ui.core.setContent
-import com.koduok.compose.navigation.core.backStackController
 import com.kotlin.pagecurl.MyApplication
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.domainobject.state.setAllResetOffset
 import com.kotlin.pagecurl.presentation.common.BodyContentComponent
 import com.kotlin.pagecurl.viewModel.BookShelfViewModel
 import com.kotlin.pagecurl.viewModel.CurlViewModel
@@ -22,44 +19,24 @@ class RootActivity : AppCompatActivity() {
     private var curlViewModel: CurlViewModel = CurlViewModel(myApplication)
     private var bookShelfViewModel: BookShelfViewModel = BookShelfViewModel(myApplication)
 
-//    private val homeViewModel by viewModels<HomeViewModel>()
-//    private val curlViewModel by viewModels<CurlViewModel>()
-
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setUpViewModel()
         setContent {
             BodyContentComponent(
-                curlViewModel,
-                homeViewModel,
-                bookShelfViewModel
+                homeViewModel
             )
         }
     }
 
     private fun setUpViewModel() {
         val viewModelProvider = ViewModelProvider(viewModelStore, defaultViewModelProviderFactory)
-        homeViewModel = viewModelProvider.get<HomeViewModel>(HomeViewModel::class.java)
-        curlViewModel = viewModelProvider.get<CurlViewModel>(CurlViewModel::class.java)
-        bookShelfViewModel = viewModelProvider.get<BookShelfViewModel>(BookShelfViewModel::class.java)
+        homeViewModel = viewModelProvider.get(HomeViewModel::class.java)
+        curlViewModel = viewModelProvider.get(CurlViewModel::class.java)
+        bookShelfViewModel = viewModelProvider.get(BookShelfViewModel::class.java)
     }
 
     override fun onBackPressed() {
-        if (!backStackController.pop()) {
-            if (isToastShowing) {
-                setAllResetOffset()
-                super.onBackPressed()
-                moveTaskToBack(true)
-            } else {
-                isToastShowing = true
-                toastMake()
-            }
-        } else {
-            CurlViewStatus.stack.map {
-                backStackController.pop()
-            }
-            CurlViewStatus.selectIndex = 0
-        }
     }
 
     private fun toastMake() {
