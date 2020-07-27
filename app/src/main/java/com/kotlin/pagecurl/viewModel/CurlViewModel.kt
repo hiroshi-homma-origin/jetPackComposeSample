@@ -13,12 +13,15 @@ import com.kotlin.pagecurl.viewExt.curl.base.CurlView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import timber.log.Timber
 
 class CurlViewModel(
     application: Application
 ) : AndroidViewModel(application) {
 
     private val curlLiveData: MutableLiveData<CurlView>? = null
+    var curlCurrentIndex = 0
+    var isCommandButtonOpen = false
 
     fun curlViewLayoutSetBackMotionEvent(curl: CurlView, orientation: Int) {
         curlLiveData?.postValue(curl)
@@ -29,6 +32,7 @@ class CurlViewModel(
                 MotionEventSetting.motionEventPortBackImp(curl)
             }
         }
+        curlCurrentIndex = curl.currentIndex
     }
 
     fun curlViewLayoutSetNextMotionEvent(curl: CurlView, orientation: Int) {
@@ -40,11 +44,12 @@ class CurlViewModel(
                 MotionEventSetting.motionEventPortNextImp(curl)
             }
         }
+        curlCurrentIndex = curl.currentIndex
     }
 
-    fun curlViewLayoutSetNext4PageMotionEvent(curl: CurlView, it: View) {
+    fun curlViewLayoutSetNext4PageMotionEvent(curl: CurlView, view: View) {
         curlLiveData?.postValue(curl)
-        it.isEnabled = false
+        view.isEnabled = false
         viewModelScope.launch(Dispatchers.Default) {
             MotionEventSetting.motionEventPortNextImp(curl)
             delay(110L)
@@ -53,13 +58,15 @@ class CurlViewModel(
             MotionEventSetting.motionEventPortNextImp(curl)
             delay(110L)
             MotionEventSetting.motionEventPortNextImp(curl)
-            it.isEnabled = true
+            view.isEnabled = true
         }
+        Timber.d("currentIndex1:${curl.currentIndex}")
+        curlCurrentIndex = curl.currentIndex - 2
     }
 
-    fun curlViewLayoutSetBack4PageMotionEvent(curl: CurlView, it: View) {
+    fun curlViewLayoutSetBack4PageMotionEvent(curl: CurlView, view: View) {
         curlLiveData?.postValue(curl)
-        it.isEnabled = false
+        view.isEnabled = false
         viewModelScope.launch(Dispatchers.Default) {
             MotionEventSetting.motionEventPortBackImp(curl)
             delay(110L)
@@ -68,8 +75,14 @@ class CurlViewModel(
             MotionEventSetting.motionEventPortBackImp(curl)
             delay(110L)
             MotionEventSetting.motionEventPortBackImp(curl)
-            it.isEnabled = true
+            view.isEnabled = true
         }
+        Timber.d("currentIndex2:${curl.currentIndex}")
+        curlCurrentIndex = curl.currentIndex - 2
+    }
+
+    fun isCommandButtonOpen() {
+        isCommandButtonOpen = !isCommandButtonOpen
     }
 
     private fun Int.getContextString(): String {
