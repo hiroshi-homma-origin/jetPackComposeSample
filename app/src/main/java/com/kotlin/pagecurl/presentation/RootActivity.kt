@@ -3,8 +3,8 @@ package com.kotlin.pagecurl.presentation
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.compose.ui.platform.setContent
 import androidx.lifecycle.ViewModelProvider
-import androidx.ui.core.setContent
 import com.kotlin.pagecurl.MyApplication
 import com.kotlin.pagecurl.presentation.common.BodyContentComponent
 import com.kotlin.pagecurl.viewModel.BookShelfViewModel

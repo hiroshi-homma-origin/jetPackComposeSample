@@ -1,24 +1,15 @@
 package com.kotlin.pagecurl.domainobject.state
 
-import androidx.compose.getValue
-import androidx.compose.mutableStateOf
-import androidx.compose.setValue
-import androidx.ui.core.LayoutCoordinates
-import androidx.ui.core.globalPosition
-import com.kotlin.pagecurl.domainobject.model.AppScreen
-import com.kotlin.pagecurl.domainobject.model.User
-import com.kotlin.pagecurl.domainobject.model.pokeListSizeFirst
-import com.kotlin.pagecurl.domainobject.model.userListSizeFirst
-import com.kotlin.pagecurl.domainobject.model.users
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.selectedUser
+import androidx.compose.ui.layout.LayoutCoordinates
+import androidx.compose.ui.layout.globalPosition
 
 object CurlViewStatus {
     var stack = mutableListOf(0)
-    var currentScreen by mutableStateOf(AppScreen.Screen1)
-    var selectIndex by mutableStateOf(AppScreen.Screen1.ordinal)
-    var selectedUser by mutableStateOf(users[users.lastIndex])
-    var pokeListSize by mutableStateOf(pokeListSizeFirst)
-    var userListSize by mutableStateOf(userListSizeFirst)
+//    var currentScreen by mutableStateOf(AppScreen.Screen1)
+//    var selectIndex by mutableStateOf(AppScreen.Screen1.ordinal)
+//    var selectedUser by mutableStateOf(users[users.lastIndex])
+//    var pokeListSize by mutableStateOf(pokeListSizeFirst)
+//    var userListSize by mutableStateOf(userListSizeFirst)
     var offsetXHome: Float = 0f
     var offsetYHome: Float = 0f
     var offsetXRanking: Float = 0f
@@ -94,6 +85,6 @@ fun setAllResetOffset() {
     CurlViewStatus.offsetYMyPage = 0f
 }
 
-fun selectUser(selectUser: User) {
-    selectedUser = selectUser
-}
+// fun selectUser(selectUser: User) {
+//    selectedUser = selectUser
+// }

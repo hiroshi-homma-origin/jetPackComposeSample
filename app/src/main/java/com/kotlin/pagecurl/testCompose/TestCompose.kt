@@ -1,6 +1,6 @@
 package com.kotlin.pagecurl.testCompose
 
-import androidx.compose.Composable
+import androidx.compose.runtime.Composable
 
 @Composable
 fun RootScreenViewTest() {

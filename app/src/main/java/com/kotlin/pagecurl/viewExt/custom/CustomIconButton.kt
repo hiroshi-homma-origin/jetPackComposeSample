@@ -1,17 +1,17 @@
 package com.kotlin.pagecurl.viewExt.custom
 
-import androidx.compose.Composable
-import androidx.ui.core.ContentScale
-import androidx.ui.core.Modifier
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.clickable
-import androidx.ui.layout.preferredSize
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.ripple.RippleIndication
-import androidx.ui.res.vectorResource
-import androidx.ui.unit.dp
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.preferredSize
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.ripple.RippleIndication
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.vectorResource
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun CustomIconButton(

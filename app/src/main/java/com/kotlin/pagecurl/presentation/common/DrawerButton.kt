@@ -1,22 +1,22 @@
 package com.kotlin.pagecurl.presentation.common
 
-import androidx.compose.Composable
-import androidx.ui.core.Alignment
-import androidx.ui.core.Modifier
-import androidx.ui.foundation.Image
-import androidx.ui.foundation.Text
-import androidx.ui.graphics.ColorFilter
-import androidx.ui.graphics.vector.VectorAsset
-import androidx.ui.layout.Arrangement.Start
-import androidx.ui.layout.Row
-import androidx.ui.layout.Spacer
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredWidth
-import androidx.ui.material.MaterialTheme
-import androidx.ui.material.Surface
-import androidx.ui.material.TextButton
-import androidx.ui.unit.dp
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredWidth
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.TextButton
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.graphics.vector.VectorAsset
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun DrawerButton(
@@ -56,7 +56,7 @@ fun DrawerButton(
             modifier = Modifier.fillMaxWidth()
         ) {
             Row(
-                horizontalArrangement = Start,
+                horizontalArrangement = Arrangement.Start,
                 verticalGravity = Alignment.CenterVertically,
                 modifier = Modifier.fillMaxWidth()
             ) {

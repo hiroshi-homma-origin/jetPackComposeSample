@@ -1,14 +1,13 @@
 package com.kotlin.pagecurl.presentation.bookshelf
 
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.layout.ColumnScope.weight
-import androidx.ui.layout.padding
-import androidx.ui.material.Surface
-import androidx.ui.unit.dp
-import com.kotlin.pagecurl.viewModel.BookShelfViewModel
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.layout.ColumnScope.weight
+import androidx.compose.foundation.layout.padding
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 
 @Composable
 fun BookShelfComponent() {

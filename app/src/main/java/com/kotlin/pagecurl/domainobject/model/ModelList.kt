@@ -1,14 +1,14 @@
 package com.kotlin.pagecurl.domainobject.model
 
 import androidx.annotation.DrawableRes
-import androidx.ui.graphics.Color
-import androidx.ui.material.icons.Icons.Filled
-import androidx.ui.material.icons.filled.Android
-import androidx.ui.material.icons.filled.Call
-import androidx.ui.material.icons.filled.DateRange
-import androidx.ui.material.icons.filled.Face
-import androidx.ui.material.icons.filled.Favorite
-import androidx.ui.material.icons.filled.Home
+import androidx.compose.material.icons.Icons.Filled
+import androidx.compose.material.icons.filled.Android
+import androidx.compose.material.icons.filled.Call
+import androidx.compose.material.icons.filled.DateRange
+import androidx.compose.material.icons.filled.Face
+import androidx.compose.material.icons.filled.Favorite
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.ui.graphics.Color
 import com.kotlin.pagecurl.R
 
 var pokeListSizeFirst = 30

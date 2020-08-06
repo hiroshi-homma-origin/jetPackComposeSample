@@ -1,18 +1,17 @@
 package com.kotlin.pagecurl.presentation.common
 
-import androidx.compose.Composable
-import androidx.ui.core.Alignment
-import androidx.ui.core.Modifier
-import androidx.ui.foundation.Icon
-import androidx.ui.foundation.Text
-import androidx.ui.layout.ColumnScope.gravity
-import androidx.ui.layout.width
-import androidx.ui.material.DrawerState.Opened
-import androidx.ui.material.IconButton
-import androidx.ui.material.ScaffoldState
-import androidx.ui.material.TopAppBar
-import androidx.ui.res.imageResource
-import androidx.ui.unit.dp
+import androidx.compose.foundation.Icon
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.ColumnScope.gravity
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.IconButton
+import androidx.compose.material.ScaffoldState
+import androidx.compose.material.TopAppBar
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.imageResource
+import androidx.compose.ui.unit.dp
 import com.kotlin.pagecurl.R.drawable
 import com.kotlin.pagecurl.domainobject.model.listDrawerItems
 
@@ -26,7 +25,7 @@ fun TopAppBarScreen(
         navigationIcon = {
             IconButton(
                 modifier = Modifier.width(60.dp),
-                onClick = { scaffoldState.drawerState = Opened }
+                onClick = { }
             ) {
                 Icon(
                     asset = imageResource(id = drawable.ic_launcher),

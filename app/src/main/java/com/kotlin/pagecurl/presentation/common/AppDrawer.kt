@@ -1,14 +1,13 @@
 package com.kotlin.pagecurl.presentation.common
 
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.layout.Column
-import androidx.ui.layout.Spacer
-import androidx.ui.layout.fillMaxSize
-import androidx.ui.layout.preferredHeight
-import androidx.ui.unit.dp
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.kotlin.pagecurl.domainobject.model.listDrawerItems
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
 
 @Composable
 fun AppDrawer(
@@ -20,7 +19,7 @@ fun AppDrawer(
             DrawerButton(
                 icon = list.second,
                 label = list.first,
-                isSelected = CurlViewStatus.selectIndex == index,
+                isSelected = false,
                 action = {
                     closeDrawer()
                 }

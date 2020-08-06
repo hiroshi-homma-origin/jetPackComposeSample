@@ -3,11 +3,9 @@ package com.kotlin.pagecurl.presentation
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.compose.getValue
+import androidx.compose.foundation.layout.Row
+import androidx.compose.ui.platform.setContent
 import androidx.lifecycle.ViewModelProvider
-import androidx.ui.core.setContent
-import androidx.ui.layout.Row
-import androidx.ui.livedata.observeAsState
 import com.kotlin.pagecurl.MyApplication
 import com.kotlin.pagecurl.presentation.common.LiveDataLoadingComponent
 import com.kotlin.pagecurl.viewModel.BookShelfViewModel
@@ -31,12 +29,12 @@ class SplashActivity : AppCompatActivity() {
             Row {
                 LiveDataLoadingComponent()
             }
-            val pList by splashViewModel.getData().observeAsState(initial = emptyList())
-            Timber.d("check_splash_pList:$pList")
-            if (pList.isNotEmpty()) {
-                startActivity(intent)
-                finish()
-            }
+//            val pList by splashViewModel.getData().observeAsState(initial = emptyList())
+//            Timber.d("check_splash_pList:$pList")
+//            if (pList.isNotEmpty()) {
+//                startActivity(intent)
+//                finish()
+//            }
         }
     }
 

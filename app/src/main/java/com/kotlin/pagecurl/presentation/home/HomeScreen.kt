@@ -1,37 +1,30 @@
 package com.kotlin.pagecurl.presentation.home
 
-import androidx.compose.Composable
-import androidx.ui.core.Modifier
-import androidx.ui.core.boundsInParent
-import androidx.ui.core.boundsInRoot
-import androidx.ui.core.onChildPositioned
-import androidx.ui.foundation.Box
-import androidx.ui.foundation.ContentGravity
-import androidx.ui.foundation.ScrollerPosition
-import androidx.ui.foundation.Text
-import androidx.ui.foundation.VerticalScroller
-import androidx.ui.foundation.shape.corner.RoundedCornerShape
-import androidx.ui.graphics.Color
-import androidx.ui.layout.Column
-import androidx.ui.layout.ColumnScope.weight
-import androidx.ui.layout.fillMaxWidth
-import androidx.ui.layout.height
-import androidx.ui.layout.padding
-import androidx.ui.layout.preferredHeight
-import androidx.ui.layout.width
-import androidx.ui.material.Card
-import androidx.ui.material.ListItem
-import androidx.ui.material.Surface
-import androidx.ui.text.TextStyle
-import androidx.ui.text.font.FontFamily
-import androidx.ui.text.font.FontWeight
-import androidx.ui.unit.dp
-import androidx.ui.unit.sp
+import androidx.compose.foundation.Box
+import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.ScrollableRow
+import androidx.compose.foundation.Text
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope.weight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.preferredHeight
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Card
+import androidx.compose.material.ListItem
+import androidx.compose.material.Surface
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.kotlin.pagecurl.api.fragment.Pokemon
 import com.kotlin.pagecurl.domainobject.model.colors
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.pokeListSize
-import com.kotlin.pagecurl.domainobject.state.setScrollHomeOffset
 import com.kotlin.pagecurl.presentation.common.GlideImage
 import com.kotlin.pagecurl.presentation.common.LiveDataLoadingComponent
 import com.kotlin.pagecurl.viewModel.HomeViewModel
@@ -71,21 +64,7 @@ fun LiveDataComponentList(
 @Composable
 fun ChildrenCompose(pList: List<Pokemon>, homeViewModel: HomeViewModel) {
     var checkCount = 0
-    VerticalScroller(
-        modifier = Modifier.onChildPositioned {
-            Timber.d("check_condition1:${it.boundsInParent.bottom}")
-            Timber.d("check_condition2:${it.boundsInRoot.bottom}")
-            if (it.boundsInParent.bottom < it.boundsInRoot.bottom) {
-                checkCount++
-                if (checkCount == 1) {
-                    if (pokeListSize < 152) pokeListSize += 20
-                    Timber.d("check_condition3:$pokeListSize")
-                }
-            }
-            setScrollHomeOffset(it)
-        },
-        scrollerPosition = ScrollerPosition(CurlViewStatus.offsetYHome)
-    ) {
+    ScrollableRow() {
         Column {
             pList.mapIndexed { index, pokemon ->
                 Card(

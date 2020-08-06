@@ -7,7 +7,6 @@ import com.kotlin.pagecurl.MyApplication
 import com.kotlin.pagecurl.data.repository.CurlViewRepository.Companion.userLiveData
 import com.kotlin.pagecurl.domainobject.model.userListSizeFirst
 import com.kotlin.pagecurl.domainobject.model.users
-import com.kotlin.pagecurl.domainobject.state.CurlViewStatus.userListSize
 
 class BookShelfViewModel constructor(
     application: Application
@@ -20,8 +19,8 @@ class BookShelfViewModel constructor(
     fun getData() = userLiveData
 
     fun retryGetData() {
-        val listSize = userListSize
-        userLiveData.postValue(users.filter { it.id < listSize })
+//        val listSize = userListSize
+//        userLiveData.postValue(users.filter { it.id < listSize })
     }
 
     fun getLastIndexData() = users[users.lastIndex]

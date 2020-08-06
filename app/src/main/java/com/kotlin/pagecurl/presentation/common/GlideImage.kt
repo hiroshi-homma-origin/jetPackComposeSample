@@ -2,17 +2,16 @@ package com.kotlin.pagecurl.presentation.common
 
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
-import androidx.compose.Composable
-import androidx.compose.FrameManager
-import androidx.compose.onCommit
-import androidx.compose.state
+import androidx.compose.foundation.Image
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.FrameManager
+import androidx.compose.runtime.onCommit
+import androidx.compose.runtime.state
+import androidx.compose.ui.WithConstraints
+import androidx.compose.ui.graphics.ImageAsset
+import androidx.compose.ui.graphics.asImageAsset
+import androidx.compose.ui.platform.ContextAmbient
 import androidx.core.graphics.drawable.toBitmap
-import androidx.ui.core.ContextAmbient
-import androidx.ui.core.WithConstraints
-import androidx.ui.foundation.Image
-import androidx.ui.graphics.ImageAsset
-import androidx.ui.graphics.asImageAsset
-// import androidx.ui.unit.IntPx
 import com.bumptech.glide.Glide
 import com.bumptech.glide.RequestBuilder
 import com.bumptech.glide.request.target.CustomTarget
@@ -51,20 +50,6 @@ fun GlideImage(
                         }
                     }
                 }
-
-//                val width =
-//                    if (constraints.maxWidth > IntPx.Zero && constraints.maxWidth < IntPx.Infinity) {
-//                        constraints.maxWidth.value
-//                    } else {
-//                        Target.SIZE_ORIGINAL
-//                    }
-//
-//                val height =
-//                    if (constraints.maxHeight > IntPx.Zero && constraints.maxHeight < IntPx.Infinity) {
-//                        constraints.maxHeight.value
-//                    } else {
-//                        Target.SIZE_ORIGINAL
-//                    }
 
                 glide
                     .asBitmap()
