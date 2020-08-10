@@ -84,15 +84,28 @@ dependencies {
     // Jetpack Compose
     implementation "androidx.compose:compose-compiler:$compose_version"
     implementation "androidx.compose.runtime:runtime:$compose_version"
-    implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.foundation:foundation-layout:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
-    implementation "androidx.compose.material:material-icons-extended:$compose_version"
-    implementation "androidx.compose.foundation:foundation:$compose_version"
-    implementation "androidx.compose.animation:animation:$compose_version"
-    implementation "androidx.ui:ui-tooling:$compose_version"
+    implementation "androidx.compose.runtime:runtime-dispatch:$compose_version"
     implementation "androidx.compose.runtime:runtime-livedata:$compose_version"
     implementation "androidx.compose.runtime:runtime-saved-instance-state:$compose_version"
+    implementation "androidx.compose.foundation:foundation:$compose_version"
+    implementation "androidx.compose.foundation:foundation-text:$compose_version"
+    implementation "androidx.compose.foundation:foundation-layout:$compose_version"
+    implementation "androidx.compose.ui:ui-util:$compose_version"
+    implementation "androidx.compose.ui:ui:$compose_version"
+    implementation "androidx.compose.ui:ui-text:$compose_version"
+    implementation "androidx.compose.ui:ui-unit:$compose_version"
+    implementation "androidx.compose.ui:ui-geometry:$compose_version"
+    implementation "androidx.compose.ui:ui-text-android:$compose_version"
+    implementation "androidx.compose.ui:ui-geometry:$compose_version"
+    implementation "androidx.compose.ui:ui-viewbinding:$compose_version"
+    implementation "androidx.compose.material:material:$compose_version"
+    implementation "androidx.compose.material:material-icons-core:$compose_version"
+    implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    implementation "androidx.compose.animation:animation-core:$compose_version"
+    implementation "androidx.compose.animation:animation:$compose_version"
+    // still being refactoring
+    implementation "androidx.ui:ui-tooling:$compose_version"
+    androidTestImplementation "androidx.ui:ui-test:$compose_version"
 
     // For Billing Service
     implementation "com.android.billingclient:billing:3.0.0"
@@ -102,14 +115,15 @@ dependencies {
     implementation 'com.google.android.gms:play-services-ads-identifier:17.0.0'
     implementation 'com.google.android.gms:play-services-oss-licenses:17.0.0'
     implementation 'com.google.android.gms:play-services-analytics:17.0.0'
+    implementation "com.google.android.gms:play-services-gcm:17.0.0"
 
     // For Firebase
     implementation 'com.google.firebase:firebase-core:17.4.4'
     implementation 'com.google.firebase:firebase-analytics:17.4.4'
     implementation 'com.google.firebase:firebase-crashlytics:17.1.1'
     implementation 'com.google.firebase:firebase-config:19.2.0'
-    implementation 'com.google.firebase:firebase-iid:20.2.3'
-    implementation 'com.google.firebase:firebase-messaging:20.2.3'
+    implementation 'com.google.firebase:firebase-iid:20.2.4'
+    implementation 'com.google.firebase:firebase-messaging:20.2.4'
 
     // Network
     implementation 'com.squareup.okhttp3:logging-interceptor:4.7.0'
@@ -127,6 +141,18 @@ dependencies {
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.7"
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.3.7"
 
+    // Room
+    implementation "androidx.room:room-runtime:$room_version"
+    annotationProcessor "androidx.room:room-compiler:$room_version"
+    implementation "androidx.room:room-ktx:$room_version"
+    implementation "androidx.room:room-guava:$room_version"
+
+    // WorkManager
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+    implementation "androidx.work:work-gcm:$work_version"
+
+    // optional - Test helpers
+
     // Third Party Library
     implementation "com.jakewharton.timber:timber:4.7.1"
     implementation "com.squareup.picasso:picasso:2.71828"
@@ -140,8 +166,8 @@ dependencies {
     androidTestImplementation "junit:junit:4.13"
     androidTestImplementation "androidx.test:rules:1.2.0"
     androidTestImplementation "androidx.test:runner:1.2.0"
-    androidTestImplementation "androidx.ui:ui-core:0.1.0-dev13"
-    androidTestImplementation "androidx.ui:ui-test:0.1.0-dev13"
+    androidTestImplementation "androidx.room:room-testing:$room_version"
+    androidTestImplementation "androidx.work:work-testing:$work_version"
 }
 
 kapt { generateStubs = true }
