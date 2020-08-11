@@ -40,7 +40,9 @@ object ApolloController {
 
                 override fun onResponse(response: Response<PokemonsQuery.Data>) {
                     // Sucess
-                    Timber.d("pokemonsList2:${response.data?.pokemons()}")
+                    runCatching {
+
+                    }
                     response.data?.pokemons()?.map { pokemon ->
                         pokemonList.add(pokemon.fragments().pokemon())
                     }

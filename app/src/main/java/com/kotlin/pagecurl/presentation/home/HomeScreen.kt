@@ -2,6 +2,7 @@ package com.kotlin.pagecurl.presentation.home
 
 import androidx.compose.foundation.Box
 import androidx.compose.foundation.ContentGravity
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.Text
 import androidx.compose.foundation.layout.Column
@@ -63,8 +64,7 @@ fun LiveDataComponentList(
 
 @Composable
 fun ChildrenCompose(pList: List<Pokemon>, homeViewModel: HomeViewModel) {
-    var checkCount = 0
-    ScrollableRow() {
+    ScrollableColumn() {
         Column {
             pList.mapIndexed { index, pokemon ->
                 Card(

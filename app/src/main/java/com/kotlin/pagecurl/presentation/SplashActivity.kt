@@ -4,9 +4,13 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.layout.Row
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.platform.setContent
 import androidx.lifecycle.ViewModelProvider
 import com.kotlin.pagecurl.MyApplication
+import com.kotlin.pagecurl.api.fragment.Pokemon
 import com.kotlin.pagecurl.presentation.common.LiveDataLoadingComponent
 import com.kotlin.pagecurl.viewModel.BookShelfViewModel
 import com.kotlin.pagecurl.viewModel.SplashViewModel
@@ -20,22 +24,23 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Timber.d("check_splash_pList:Start")
         setUpViewModel()
         splashViewModel.fetchData()
         bookShelfViewModel.fetchData()
         val intent = Intent(this, RootActivity::class.java)
         setContent {
-            Row {
-                LiveDataLoadingComponent()
+            Row { LiveDataLoadingComponent() }
+            if (observe().isNotEmpty()) {
+                startActivity(intent)
+                finish()
             }
-//            val pList by splashViewModel.getData().observeAsState(initial = emptyList())
-//            Timber.d("check_splash_pList:$pList")
-//            if (pList.isNotEmpty()) {
-//                startActivity(intent)
-//                finish()
-//            }
         }
+    }
+
+    @Composable
+    fun observe(): List<Pokemon> {
+        val pList by splashViewModel.getData().observeAsState(initial = emptyList())
+        return pList
     }
 
     private fun setUpViewModel() {

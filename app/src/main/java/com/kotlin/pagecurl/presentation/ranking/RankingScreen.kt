@@ -1,5 +1,6 @@
 package com.kotlin.pagecurl.presentation.ranking
 
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +20,7 @@ import timber.log.Timber
 
 @Composable
 fun RankingComponent() {
-    ScrollableRow(
+    ScrollableColumn(
         modifier = Modifier.onChildPositioned {
             Timber.d("check_condition1:${it.globalPosition}")
             setScrollRankingOffset(it)

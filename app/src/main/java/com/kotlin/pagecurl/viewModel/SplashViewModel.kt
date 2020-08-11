@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.kotlin.pagecurl.MyApplication
 import com.kotlin.pagecurl.data.api.ApolloController
 import com.kotlin.pagecurl.data.repository.CurlViewRepository.Companion.pokemonLiveData
+import com.kotlin.pagecurl.domainobject.model.pokeListMaxSize
 import com.kotlin.pagecurl.domainobject.model.pokeListSizeFirst
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -19,8 +20,8 @@ class SplashViewModel constructor(
 
     fun fetchData() {
         viewModelScope.launch(Dispatchers.Default) {
-            ApolloController.registerPokemonLiveData(pokeListSizeFirst)
-//            ApolloController.registerPokemonLiveData(pokeListMaxSize)
+//            ApolloController.registerPokemonLiveData(pokeListSizeFirst)
+            ApolloController.registerPokemonLiveData(pokeListMaxSize)
         }
     }
 

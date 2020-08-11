@@ -4,11 +4,13 @@ import androidx.compose.material.Scaffold
 import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import com.kotlin.pagecurl.presentation.home.HomeViewComponent
+import com.kotlin.pagecurl.viewModel.CurlViewModel
 import com.kotlin.pagecurl.viewModel.HomeViewModel
 
 @Composable
 fun BodyContentComponent(
-    homeViewModel: HomeViewModel
+    homeViewModel: HomeViewModel,
+    curlViewModel: CurlViewModel
 ) {
     Scaffold(
         scaffoldState = rememberScaffoldState(),
@@ -25,6 +27,7 @@ fun BodyContentComponent(
         },
         bodyContent = {
             HomeViewComponent(homeViewModel)
+//            CurlViewComponent(curlViewModel)
         }
     )
 }

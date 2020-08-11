@@ -1,5 +1,6 @@
 package com.kotlin.pagecurl.presentation.mypage
 
+import androidx.compose.foundation.ScrollableColumn
 import androidx.compose.foundation.ScrollableRow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -19,7 +20,7 @@ import timber.log.Timber
 
 @Composable
 fun MyPageComponent() {
-    ScrollableRow(
+    ScrollableColumn(
         modifier = Modifier.onChildPositioned {
             Timber.d("check_condition4:${it.globalPosition}")
             setScrollMyPageOffset(it)

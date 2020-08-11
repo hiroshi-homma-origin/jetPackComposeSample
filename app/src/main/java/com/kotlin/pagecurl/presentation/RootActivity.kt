@@ -24,7 +24,8 @@ class RootActivity : AppCompatActivity() {
         setUpViewModel()
         setContent {
             BodyContentComponent(
-                homeViewModel
+                homeViewModel,
+                curlViewModel
             )
         }
     }
